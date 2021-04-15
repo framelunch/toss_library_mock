@@ -1,4 +1,5 @@
-# src
+# toss_library_mock
+TOSS 動画ライブラリ改修用Mock
 
 ## Build Setup
 
