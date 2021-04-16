@@ -16,7 +16,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
+    titleTemplate: 'toss_library_mock',
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -37,7 +37,11 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/composition-api'
+    '@/plugins/composition-api',
+    {
+      src: '@/plugins/swiper',
+      mode: 'client'
+    }
   ],
   /*
   ** Auto import components
@@ -82,5 +86,8 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    vendor: [
+      'vue-awesome-swiper'
+    ]
   }
 }

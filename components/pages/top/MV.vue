@@ -1,39 +1,56 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
+  <!-- MV -->
+  <div class="mv">
+    <v-carousel
+      cycle
+      :show-arrows="false"
     >
-      <div class="text-center">
-        {{ text }}
-      </div>
-    </v-flex>
-  </v-layout>
+      <v-carousel-item
+        v-for="i in 5"
+        :key="i"
+      >
+        <v-sheet
+          color="#ccc"
+          height="100%"
+        >
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
+
+    <div class="mv__index">
+      <p class="text">
+        学び続ける教師のためのTOSSセミナーを<br>
+        オンラインで受けられる動画配信サイト
+      </p>
+      <p class="title">TOSS 動画ライブラリー</p>
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+<style>
+.mv {
+  position: relative;
+}
 
-export default defineComponent({
-  setup (_) {
-    /* Reactive State */
-    const reactiveState = reactive({
-      text: 'hello!'
-    })
+.mv .v-carousel__controls {
+  background: transparent;
+}
 
-    /* Methods */
-    const methods = {
-    }
+.mv .mv__index {
+  height: fit-content;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 80px;
+  line-height: 1.8;
+}
 
-    return {
-      ...toRefs(reactiveState),
-      ...methods
-    }
-  }
-})
-</script>
+.mv .mv__index .text {
+  font-size: .85rem;
+}
+
+.mv .mv__index .title {
+  font-size: 1.6rem !important;
+}
+</style>
