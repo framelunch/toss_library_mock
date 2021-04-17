@@ -94,7 +94,7 @@ export default defineComponent({
 /* Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  top: 35%;
+  top: 32%;
 }
 
 .swiper-button-prev {

@@ -43,7 +43,7 @@
         </v-btn>
         <v-btn
           text
-          to="/"
+          to="/mypage"
           nuxt
           :ripple="false"
         >
