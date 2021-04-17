@@ -35,7 +35,7 @@
         </v-btn>
         <v-btn
           text
-          to="/"
+          to="/cart"
           nuxt
           :ripple="false"
         >
