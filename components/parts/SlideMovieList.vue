@@ -1,5 +1,5 @@
 <template>
-  <div class="movieList">
+  <div class="slideMovieList">
     <swiper :options="swiperOption">
       <swiper-slide
         v-for="(item, i) in items"
@@ -81,11 +81,11 @@ export default defineComponent({
 </script>
 
 <style>
-.movieList .slide__inner .image img {
+.slideMovieList .slide__inner .image img {
   width: 100%;
 }
 
-.movieList .slide__inner .title {
+.slideMovieList .slide__inner .title {
   font-size: 14px !important;
   font-weight: bold;
   line-height: 1.8;

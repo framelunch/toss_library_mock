@@ -2,7 +2,7 @@
   <v-main class="pa-0">
     <v-container
       fluid
-      class="search"
+      class="search pt-15 px-10"
     >
       <div class="pb-3 search__head">
         <v-row class="justify-space-between">
@@ -125,7 +125,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "@vue/composition-api"
-import SearchList from '@/components/pages/search/list/SearchList.vue'
+import SearchList from '@/components/pages/search/parts/SearchList.vue'
 
 export default defineComponent({
   components: {
@@ -262,7 +262,6 @@ export default defineComponent({
 .search {
   height: 100vh;
   overflow-y: auto;
-  padding: 60px 40px 0 40px;
   width: 100%;
 }
 

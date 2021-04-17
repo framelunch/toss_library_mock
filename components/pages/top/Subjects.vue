@@ -18,18 +18,18 @@
       <nuxt-link to="/search">一覧を見る</nuxt-link>
     </div>
     <div class="list__body">
-      <movie-list />
+      <slide-movie-list />
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "@vue/composition-api"
-import MovieList from '@/components/pages/top/list/MovieList.vue'
+import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 
 export default defineComponent({
   components: {
-    MovieList
+    SlideMovieList
   },
   setup (_) {
     /* Reactive State */

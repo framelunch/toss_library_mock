@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from "@vue/composition-api"
-import TeacherList from '@/components/pages/top/list/TeacherList.vue'
+import TeacherList from '@/components/pages/top/parts/TeacherList.vue'
 
 export default defineComponent({
   components: {

@@ -1,5 +1,5 @@
 <template>
-  <v-main class="pa-0">
+  <v-main class="mb-10 pa-0">
     <v-container fluid class="top pa-0">
       <!-- MV -->
       <MV />
@@ -39,10 +39,6 @@ export default defineComponent({
 </script>
 
 <style>
-.top {
-  margin-bottom: 40px;
-}
-
 section.list {
   margin-top: 40px;
   padding-left: 40px;

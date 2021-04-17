@@ -217,25 +217,7 @@
             </section>
             <section class="mt-15">
               <h4 class="mb-5">あなたへのおすすめ動画</h4>
-              <v-row
-                v-for="i in 2"
-                :key="i"
-              >
-                <v-col
-                  v-for="(item, i) in items"
-                  :key="i"
-                  cols="6"
-                  md="3"
-                  class="item"
-                >
-                  <figure class="image">
-                    <img :src="item.image" alt="">
-                  </figure>
-                  <p class="title">
-                    {{ item.title }}
-                  </p>
-                </v-col>
-              </v-row>
+              <movie-list />
             </section>
           </v-container>
         </v-stepper-content>
@@ -246,8 +228,12 @@
 
 <script lang="ts">
 import { defineComponent, reactive, SetupContext, toRefs, computed } from "@vue/composition-api"
+import MovieList from '@/components/parts/MovieList.vue'
 
 export default defineComponent({
+  components: {
+    MovieList
+  },
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
@@ -410,16 +396,6 @@ input[type=checkbox]:checked ~ .expand::before {
   letter-spacing: .02em;
   line-height: 1.8;
   white-space: pre;
-}
-
-.complete .item .image img {
-  width: 100%;
-}
-
-.complete .item .title {
-  font-size: 14px !important;
-  font-weight: bold;
-  line-height: 1.8;
 }
 
 /* animation */
