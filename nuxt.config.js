@@ -88,6 +88,14 @@ export default {
   build: {
     vendor: [
       'vue-awesome-swiper'
-    ]
+    ],
+    postcss: {
+      plugins: {
+        'postcss-preset-env': {
+          stage: 0,
+          importFrom: './assets/css/variables.css'
+        }
+      }
+    }
   }
 }
