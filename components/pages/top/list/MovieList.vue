@@ -97,6 +97,14 @@ export default defineComponent({
   top: 35%;
 }
 
+.swiper-button-prev {
+  left: 15px;
+}
+
+.swiper-button-next {
+  right: 15px;
+}
+
 .swiper-button-prev:after,
 .swiper-button-next:after {
   content: '';
@@ -106,5 +114,9 @@ export default defineComponent({
   height: 26px;
   width: 40px;
   transform: rotate(45deg);
+}
+
+.swiper-slide:last-child .slide__inner {
+  margin-right: 10px;
 }
 </style>

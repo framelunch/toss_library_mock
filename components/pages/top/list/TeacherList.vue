@@ -25,7 +25,7 @@ export default defineComponent({
     const reactiveState = reactive({
       swiperOption: {
         delay: 1000,
-        slidesPerView: 5,
+        slidesPerView: 5.5,
         spaceBetween: 0,
       },
       teachers: [
@@ -50,7 +50,7 @@ export default defineComponent({
 
 <style>
 .teacherList .slide__inner .image {
-  background-color: #ccc;
+  background-color: #E9E9E9;
   border-radius: 50%;
   margin: auto;
   height: 200px;

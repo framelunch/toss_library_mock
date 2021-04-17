@@ -10,7 +10,7 @@
         :key="i"
       >
         <v-sheet
-          color="#ccc"
+          color="#E9E9E9"
           height="100%"
         >
         </v-sheet>
