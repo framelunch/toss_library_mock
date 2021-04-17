@@ -20,7 +20,7 @@
                 v-if="showDetailMenu.teacher"
                 class="detailMenu -teacher"
               >
-                <v-container class="pa-10">
+                <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
                       v-for="(item, i) in teachers"
@@ -45,7 +45,7 @@
                 v-if="showDetailMenu.subject"
                 class="detailMenu -subject"
               >
-                <v-container class="pa-10">
+                <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
                       v-for="(item, i) in subjects"
@@ -70,7 +70,7 @@
                 v-if="showDetailMenu.category"
                 class="detailMenu -category"
               >
-                <v-container class="pa-10">
+                <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
                       v-for="(item, i) in categories"
@@ -95,7 +95,7 @@
                 v-if="showDetailMenu.plan"
                 class="detailMenu -plan"
               >
-                <v-container class="pa-10">
+                <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
                       v-for="(item, i) in plans"
@@ -274,7 +274,6 @@ export default defineComponent({
 
 .search__head .menu {
   cursor: pointer;
-  font-size: 1em;
   position: relative;
   transition: .3s;
   width: 25%;
@@ -360,7 +359,6 @@ export default defineComponent({
 .detailItem {
   cursor: pointer;
   flex-basis: 100% !important;
-  font-size: 1em;
   transition: .15s;
 }
 
