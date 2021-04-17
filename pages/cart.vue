@@ -1,6 +1,8 @@
 <template>
   <v-main class="px-15 py-10">
-    <h2 class="pb-3 mb-6">カート</h2>
+    <h2 class="pb-3 mb-6 border-bottom">
+      カート
+    </h2>
     <v-stepper
       v-model="stepper"
       alt-labels
@@ -69,7 +71,7 @@
 
               <section class="payment mt-15">
                 <div class="payment__inner">
-                  <h3 class="pb-3 mb-2">
+                  <h3 class="pb-3 mb-2 border-bottom">
                     お支払い方法
                   </h3>
                   <v-radio-group v-model="defaultSelected">
@@ -300,8 +302,7 @@ export default defineComponent({
 </script>
 
 <style>
-h2,
-h3 {
+.border-bottom {
   border-bottom: 2px solid #E9E9E9;
 }
 
