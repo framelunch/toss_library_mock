@@ -2,11 +2,14 @@
   <v-main class="pa-0">
     <v-container
       fluid
-      class="search pt-15 px-10"
+      class="search pt-15 px-0"
     >
       <div class="pb-3 search__head">
         <v-row class="justify-space-between">
-          <v-col class="d-flex justify-center menu all">
+          <v-col
+            class="d-flex justify-center menu all"
+            @click="selectAll"
+          >
             ALL
           </v-col>
           <v-col
@@ -26,6 +29,7 @@
                       v-for="(item, i) in teachers"
                       :key="i"
                       class="detailItem pa-2"
+                      @click="selectTeacher"
                     >
                       {{ item.name }}
                     </v-col>
@@ -51,6 +55,7 @@
                       v-for="(item, i) in subjects"
                       :key="i"
                       class="detailItem pa-2"
+                      @click="selectSubject"
                     >
                       {{ item.name }}
                     </v-col>
@@ -76,6 +81,7 @@
                       v-for="(item, i) in categories"
                       :key="i"
                       class="detailItem pa-2"
+                      @click="selectCategory"
                     >
                       {{ item.name }}
                     </v-col>
@@ -101,6 +107,7 @@
                       v-for="(item, i) in plans"
                       :key="i"
                       class="detailItem pa-2"
+                      @click="selectPlan"
                     >
                       {{ item.name }}
                     </v-col>
@@ -116,24 +123,38 @@
         class="search__body"
         @click="hiddenDetail"
       >
-        <h2 class="mb-5">あなたへのおすすめ</h2>
-        <search-list />
+        <div class="title pl-10  mb-8">
+          <h2>
+            {{ title }}
+            <span>の動画とセミナー</span>
+          </h2>
+          <p v-if="!showAll" class="number mt-1">（全60件）</p>
+        </div>
+
+        <search-all v-if="showAll" />
+        <search-part v-else />
       </div>
     </v-container>
   </v-main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
-import SearchList from '@/components/pages/search/parts/SearchList.vue'
+import { defineComponent, reactive, toRefs, onMounted, SetupContext } from "@vue/composition-api"
+import SearchAll from '@/components/pages/search/SearchAll.vue'
+import SearchPart from '@/components/pages/search/SearchPart.vue'
 
 export default defineComponent({
   components: {
-    SearchList
+    SearchAll,
+    SearchPart
   },
-  setup (_) {
+  setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
+      query: {},
+      hash: '',
+      showAll: true,
+      title: '全て',
       headMenu: [
         {
           id: 'all',
@@ -208,7 +229,6 @@ export default defineComponent({
     /* Methods */
     const methods = {
       showDetail (menuId: string) {
-        console.log(menuId)
         if (menuId !== 'all') {
           switch (menuId) {
             case 'teacher':
@@ -247,8 +267,63 @@ export default defineComponent({
         reactiveState.showDetailMenu.teacher = false
         reactiveState.showDetailMenu.subject = false
         reactiveState.showDetailMenu.category = false
+      },
+      selectAll () {
+        context.root.$router.push('search')
+        reactiveState.title = '全て'
+        reactiveState.showAll = true
+      },
+      selectTeacher () {
+        context.root.$router.push({path: 'search', query: { teacher: 'my' } })
+        reactiveState.title = '向山 洋一先生'
+        reactiveState.showAll = false
+      },
+      selectSubject () {
+        context.root.$router.push({path: 'search', query: { subject: 'lang' } })
+        reactiveState.title = '国語'
+        reactiveState.showAll = false
+      },
+      selectCategory () {
+        context.root.$router.push({path: 'search', query: { category: 'special' } })
+        reactiveState.title = '特別支援教育'
+        reactiveState.showAll = false
+      },
+      selectPlan () {
+        context.root.$router.push({path: 'search', query: { plan: 'free' } })
+        reactiveState.title = 'フリープラン'
+        reactiveState.showAll = false
       }
     }
+
+    onMounted(() => {
+      const query = context.root.$route.query
+      const hash = context.root.$route.hash
+      reactiveState.query = query
+      reactiveState.hash = hash
+
+      if (query) {
+        reactiveState.showAll = false
+
+        if (query.teacher) {
+          reactiveState.title = '向山 洋一先生'
+
+        } else if (query.subject) {
+          reactiveState.title = '国語'
+        }
+      }
+
+      if (hash) {
+        if (hash.includes('new')) {
+          reactiveState.title = '新着動画'
+
+        } else if (hash.includes('recomend')) {
+          reactiveState.title = 'あなたへのおすすめ'
+
+        } else if (hash.includes('history')) {
+          reactiveState.title = '再生履歴'
+        }
+      }
+    })
 
     return {
       ...toRefs(reactiveState),
@@ -263,6 +338,10 @@ export default defineComponent({
   height: 100vh;
   overflow-y: auto;
   width: 100%;
+}
+
+.search h2 span {
+  font-weight: normal;
 }
 
 .search__head {
@@ -322,6 +401,7 @@ export default defineComponent({
   left: 0;
   right: 0;
   max-width: 640px;
+  z-index: 99;
 }
 
 .detailMenu .container {

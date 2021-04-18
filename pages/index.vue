@@ -55,10 +55,11 @@ section.list .list__head h2 {
   font-weight: normal;
 }
 
-section.list .list__head a {
-  display: block;
+section.list .list__head small {
+  color: #64b5f6;
+  cursor: pointer;
   font-size: 14px;
   margin-left: 20px;
-  text-decoration: none;
+  transition: .15s;
 }
 </style>

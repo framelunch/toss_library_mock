@@ -1,9 +1,9 @@
 <template>
   <!-- 新着動画 -->
-  <section class="list -new">
+  <section class="list -new mt-15">
     <div class="list__head">
       <h2>新着動画</h2>
-      <nuxt-link to="/search">一覧を見る</nuxt-link>
+      <small @click="toSearch">一覧を見る</small>
     </div>
     <div class="list__body">
       <slide-movie-list />
@@ -12,18 +12,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api"
+import { defineComponent, SetupContext } from "@vue/composition-api"
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 
 export default defineComponent({
   components: {
     SlideMovieList
+  },
+  setup (_, context: SetupContext) {
+    /* Methods */
+    const methods = {
+      toSearch () {
+        context.root.$router.push({path: 'search', hash: 'new' })
+      }
+    }
+
+    return {
+      ...methods
+    }
   }
 })
 </script>
-
-<style>
-.movie.-new {
-  margin-top: 60px;
-}
-</style>

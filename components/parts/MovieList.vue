@@ -55,6 +55,11 @@ export default defineComponent({
 </script>
 
 <style>
+.movieList .item {
+  cursor: pointer;
+  transition: .3s;
+}
+
 .movieList .item .image img {
   width: 100%;
 }

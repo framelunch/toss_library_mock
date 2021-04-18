@@ -3,7 +3,7 @@
   <section class="list -playbackHistory">
     <div class="list__head">
       <h2>再生履歴</h2>
-      <nuxt-link to="/search">一覧を見る</nuxt-link>
+      <small @click="toSearch">一覧を見る</small>
     </div>
     <div class="list__body">
       <slide-movie-list />
@@ -12,12 +12,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api"
+import { defineComponent, SetupContext } from "@vue/composition-api"
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 
 export default defineComponent({
   components: {
     SlideMovieList
+  },
+  setup (_, context: SetupContext) {
+    /* Methods */
+    const methods = {
+      toSearch () {
+        context.root.$router.push({path: 'search', hash: 'history' })
+      }
+    }
+
+    return {
+      ...methods
+    }
   }
 })
 </script>

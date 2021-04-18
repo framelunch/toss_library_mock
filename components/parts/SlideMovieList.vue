@@ -81,6 +81,11 @@ export default defineComponent({
 </script>
 
 <style>
+.slideMovieList .slide__inner {
+  cursor: pointer;
+  transition: .3s;
+}
+
 .slideMovieList .slide__inner .image img {
   width: 100%;
 }

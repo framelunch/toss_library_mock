@@ -1,5 +1,5 @@
 <template>
-  <div class="searchList">
+  <div class="searchList py-8 px-10">
     <v-row
       v-for="i in 15"
       :key="i"
@@ -21,12 +21,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api"
 
 export default defineComponent({
+  props: {
+    isLoading: {
+      type: Boolean,
+      required: true
+    }
+  },
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
+      isLoading: false,
       items: [
         {
           image: require('@/assets/images/movie01.png'),
@@ -47,6 +54,14 @@ export default defineComponent({
       ]
     })
 
+    onMounted(() => {
+      reactiveState.isLoading = true
+
+      setTimeout(() => {
+        reactiveState.isLoading = false
+      }, 2000)
+    })
+
     return {
       ...toRefs(reactiveState)
     }
@@ -55,6 +70,11 @@ export default defineComponent({
 </script>
 
 <style>
+.searchList .item {
+  cursor: pointer;
+  transition: .3s;
+}
+
 .searchList .item .image img {
   width: 100%;
 }

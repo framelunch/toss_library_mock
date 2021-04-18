@@ -5,7 +5,10 @@
         v-for="(teacher, i) in teachers"
         :key="i"
       >
-        <div class="slide__inner">
+        <div
+          class="slide__inner"
+          @click="toSearch(teacher.name)"
+        >
           <figure class="image"></figure>
           <p class="name">
             {{ teacher.name }}
@@ -17,10 +20,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, SetupContext, toRefs } from "@vue/composition-api"
 
 export default defineComponent({
-  setup (_) {
+  setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
       swiperOption: {
@@ -41,14 +44,27 @@ export default defineComponent({
       ]
     })
 
+    /* Methods */
+    const methods = {
+      toSearch (name: string) {
+        context.root.$router.push({path: 'search', query: { teacher: 'my' } })
+      }
+    }
+
     return {
-      ...toRefs(reactiveState)
+      ...toRefs(reactiveState),
+      ...methods
     }
   }
 })
 </script>
 
 <style>
+.teacherList .slide__inner {
+  cursor: pointer;
+  transition: .3s;
+}
+
 .teacherList .slide__inner .image {
   background-color: #E9E9E9;
   border-radius: 50%;
