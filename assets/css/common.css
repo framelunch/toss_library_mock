@@ -1,0 +1,19 @@
+@media (min-width: 960px) {
+  .not-sm-only {
+    display: block;
+  }
+
+  .sm-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 959px) {
+  .not-sm-only {
+    display: none !important;
+  }
+
+  .sm-only {
+    display: block;
+  }
+}

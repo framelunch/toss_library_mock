@@ -12,7 +12,7 @@
         <figure class="image">
           <img :src="item.image" alt="">
         </figure>
-        <p class="title">
+        <p class="title mb-0">
           {{ item.title }}
         </p>
       </v-col>
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
   setup (_) {
@@ -54,10 +54,22 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
 .movieList .item {
   cursor: pointer;
   transition: .3s;
+
+  @media (--sm) {
+    display: flex;
+    flex-basis: 100%;
+    padding: 8px !important;
+  }
+}
+
+.movieList .item .image {
+  @media (--sm) {
+    flex-basis: 45%;
+  }
 }
 
 .movieList .item .image img {
@@ -68,5 +80,12 @@ export default defineComponent({
   font-size: 14px !important;
   font-weight: bold;
   line-height: 1.8;
+
+  @media (--sm) {
+    flex-basis: 65%;
+    font-size: 12px !important;
+    line-height: 1.6;
+    padding-left: 10px;
+  }
 }
 </style>

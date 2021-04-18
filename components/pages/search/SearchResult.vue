@@ -18,7 +18,7 @@
       background-color="transparent"
       grow
       color="#808080"
-      class="tabs ml-10"
+      class="tabs"
     >
       <v-tab
         v-for="item in items"
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import SearchList from '@/components/pages/search/parts/SearchList.vue'
 import Loading from '@/components/pages/search/parts/Loading.vue'
 
@@ -71,7 +71,7 @@ export default defineComponent({
         reactiveState.isLoading = true
         setTimeout(() => {
           reactiveState.isLoading = false
-        }, 3000)
+        }, 2000)
       },
       changeValue (value: any) {
         console.log('value', value)
@@ -91,19 +91,31 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
 .searchPart {
   position: relative;
 }
 
 .selectBox.-sort {
   position: absolute;
+  top: -10px;
   right: 40px;
   width: 180px;
+
+  @media (--sm) {
+    top: -70px;
+    right: auto;
+    left: 0;
+    width: 160px;
+  }
 }
 
-.selectBox.-sort .v-select__selection.v-select__selection--comma {
+.selectBox.-sort .v-select__selection {
   font-size: .9em;
+
+  @media (--sm) {
+    font-size: .8em;
+  }
 }
 
 .selectBox.-sort input::placeholder {
@@ -112,6 +124,12 @@ export default defineComponent({
 
 .tabs {
   max-width: 300px !important;
+  margin-left: 40px;
+
+  @media (--sm) {
+    max-width: 100% !important;
+    margin-left: 0;
+  }
 }
 
 .tabs .v-tab.v-tab--active {

@@ -4,21 +4,21 @@
       <!-- MV -->
       <MV />
       <!-- 新着動画 -->
-      <new-movies />
+      <new-movies :is-mobile="isMobile" />
       <!-- おすすめ -->
-      <recomend-movies />
+      <recomend-movies :is-mobile="isMobile" />
       <!-- 再生履歴 -->
-      <playback-history />
+      <playback-history :is-mobile="isMobile" />
       <!-- 先生から探す -->
-      <teachers />
+      <teachers :is-mobile="isMobile" />
       <!-- 教科から探す -->
-      <subjects />
+      <subjects :is-mobile="isMobile" />
     </v-container>
   </v-main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import MV from '@/components/pages/top/MV.vue'
 import NewMovies from '@/components/pages/top/NewMovies.vue'
 import RecomendMovies from '@/components/pages/top/RecomendMovies.vue'
@@ -34,25 +34,77 @@ export default defineComponent({
     PlaybackHistory,
     Teachers,
     Subjects
+  },
+  setup (_) {
+    /* Reactive State */
+    const reactiveState = reactive({
+      isMobile: false
+    })
+
+    onMounted(() => {
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
+      }
+    })
+
+    return {
+      ...toRefs(reactiveState)
+    }
   }
 })
 </script>
 
-<style>
+<style lang="postcss">
 section.list {
   margin-top: 40px;
   padding-left: 40px;
   width: 100%;
+
+  @media (--sm) {
+    padding: 0 20px;
+  }
 }
 
-section.list .list__head {
+section.list .list__head:not(.sm-only) {
   align-items: center;
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+section.list .list__head.sm-only {
+  align-items: center;
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.selectBox {
+  margin-left: 20px;
+  width: 180px;
+
+  @media (--sm) {
+    margin-left: 10px;
+    width: 140px;
+  }
+}
+
+.selectBox.sm-only {
+  margin-left: 0;
+  margin-bottom: 24px;
+}
+
+.selectBox .v-select__selection {
+  @media (--sm) {
+    font-size: 12px;
+  }
 }
 
 section.list .list__head h2 {
   font-weight: normal;
+
+  @media (--sm) {
+    font-size: 18px;
+  }
 }
 
 section.list .list__head small {
@@ -61,5 +113,9 @@ section.list .list__head small {
   font-size: 14px;
   margin-left: 20px;
   transition: .15s;
+
+  @media (--sm) {
+    font-size: 12px;
+  }
 }
 </style>

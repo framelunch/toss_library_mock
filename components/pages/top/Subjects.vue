@@ -1,7 +1,7 @@
 <template>
   <!-- 教科から探す -->
   <section class="list -subjects">
-    <div class="list__head">
+    <div class="list__head not-sm-only">
       <h2>教科から探す</h2>
       <div class="selectBox">
         <v-select
@@ -17,19 +17,47 @@
       </div>
       <small @click="toSearch">一覧を見る</small>
     </div>
-    <div class="list__body">
+
+    <div class="list__head sm-only">
+      <h2>教科から探す</h2>
+      <small @click="toSearch">一覧を見る</small>
+    </div>
+    <div class="selectBox sm-only">
+      <v-select
+        :items="subjects"
+        :value="subjects[0]"
+        label=""
+        placeholder=""
+        hide-details=""
+        dense
+        outlined
+        class="rounded-0"
+      />
+    </div>
+    <div v-if="!isMobile" class="list__body">
       <slide-movie-list />
+    </div>
+    <div v-else class="list__body">
+      <movie-list />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, SetupContext } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, SetupContext } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
+import MovieList from '@/components/parts/MovieList.vue'
 
 export default defineComponent({
   components: {
-    SlideMovieList
+    SlideMovieList,
+    MovieList
+  },
+  props: {
+    isMobile: {
+      type: Boolean,
+      required: true
+    }
   },
   setup (_, context: SetupContext) {
     /* Reactive State */
@@ -51,10 +79,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style>
-.selectBox {
-  margin-left: 20px;
-  width: 180px;
-}
-</style>

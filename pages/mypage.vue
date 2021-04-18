@@ -1,14 +1,16 @@
 <template>
-  <v-main class="px-15 py-10">
-    <v-container
-      fluid
-      class="mypage"
-    >
+  <v-main class="mypage">
+    <v-container fluid>
       <section class="playbackHistory">
         <div class="list__head mb-6">
           <h2>再生履歴</h2>
         </div>
-        <slide-movie-list />
+        <div v-if="!isMobile" class="list__body">
+          <slide-movie-list />
+        </div>
+        <div v-else class="list__body">
+          <movie-list />
+        </div>
       </section>
 
       <hr class="my-10" color="#C8C8C8" />
@@ -35,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, SetupContext, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, SetupContext, toRefs, onMounted } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 import MovieList from '@/components/parts/MovieList.vue'
 
@@ -44,22 +46,33 @@ export default defineComponent({
     SlideMovieList,
     MovieList
   },
-  setup (_, context: SetupContext) {
+  setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
+      isMobile: false
     })
 
-    /* Methods */
-    const methods = {
-    }
+    onMounted(() => {
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
+      }
+    })
 
     return {
-      ...toRefs(reactiveState),
-      ...methods
+      ...toRefs(reactiveState)
     }
   }
 })
 </script>
 
 <style>
+.mypage {
+  padding: 60px 40px !important;
+
+  @media (--sm) {
+    padding: 20px 10px !important;
+  }
+}
+
 </style>

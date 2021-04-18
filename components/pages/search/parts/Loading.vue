@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api"
+import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
   props: {
@@ -42,14 +42,5 @@ export default defineComponent({
   fill: #e4e4e4;
 	height: 10vw;
 	width: 10vw;
-}
-
-@keyframes spin_frames {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }
 </style>

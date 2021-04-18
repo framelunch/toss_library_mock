@@ -1,6 +1,6 @@
 <template>
-  <div class="teacherList">
-    <swiper :options="swiperOption">
+  <div class="teacherList -sp">
+    <swiper :options="swiperOptionSp">
       <swiper-slide
         v-for="(teacher, i) in teachers"
         :key="i"
@@ -26,10 +26,10 @@ export default defineComponent({
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
-      swiperOption: {
+      swiperOptionSp: {
         delay: 1000,
-        slidesPerView: 5.5,
-        spaceBetween: 0
+        slidesPerView: 3.5,
+        spaceBetween: 25
       },
       teachers: [
         { name: '向山 洋一' },
@@ -60,21 +60,22 @@ export default defineComponent({
 </script>
 
 <style>
-.teacherList .slide__inner {
+.teacherList.-sp .slide__inner {
   cursor: pointer;
   transition: .3s;
 }
 
-.teacherList .slide__inner .image {
+.teacherList.-sp .slide__inner .image {
   background-color: #E9E9E9;
   border-radius: 50%;
   margin: auto;
-  height: 200px;
-  width: 200px;
+  height: 80px;
+  width: 80px;
 }
 
-.teacherList .slide__inner .name {
-  margin-top: 20px;
+.teacherList.-sp .slide__inner .name {
+  font-size: 12px;
+  margin-top: 10px;
   text-align: center;
 }
 </style>

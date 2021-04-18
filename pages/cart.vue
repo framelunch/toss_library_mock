@@ -1,6 +1,6 @@
 <template>
-  <v-main class="px-15 py-10">
-    <h2 class="pb-3 mb-6 border-bottom">
+  <v-main class="cart">
+    <h2 class="border-bottom">
       カート
     </h2>
     <v-stepper
@@ -15,9 +15,8 @@
               v-if="cartItem"
               key="item"
               fluid
-              class="cart"
             >
-              <section class="cartItem">
+              <section v-if="!isMobile" class="cartItem">
                 <v-card class="pa-5" style="box-shadow: none !important;">
                   <v-row class="flex-row align-start">
                     <v-col width="40%">
@@ -60,11 +59,58 @@
                 </v-card>
               </section>
 
+              <section v-else class="cartItem">
+                <v-card style="box-shadow: none !important;">
+                  <v-card-title class="px-0">
+                    雪国のくらし
+                  </v-card-title>
+                  <v-row class="flex-row align-start">
+                    <v-col style="flex-basis: 30%;">
+                      <img src="~/assets/images/cart_image.png" alt="" width="90%">
+                    </v-col>
+                    <v-col>
+                      <v-card-text class="px-0">
+                        <p class="price">
+                          ¥20,000
+                        </p>
+                        <small
+                          class="delete"
+                          @click="cartItem = false"
+                        >
+                          カートから削除
+                      </small>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <div class="toggleBox">
+                        <input id="leer2" type="checkbox"/>
+                        <label
+                          for="leer2"
+                          :class="{ '-open':isOpenTextBox }"
+                          @click="openTextBox"
+                        >
+                          もっと見る
+                        </label>
+                        <div class="expand">
+                          <p class="text mb-0">
+                            伸びやかでダイナミックでしかも高度。それは、超高段の芸である谷 和樹 (玉川大学教職大学院　教授) 1時間目 テープ起こし 解説　子ども達はいったい何のことで討論しているのか根本 直樹 解説　築地氏への提言「強い指導無しに子どもだけで自然に討論は進むことの証明」川原 雅樹 解説　討論が始まるまでに向山型指導のエッセンスがある小貫 義智 解説　圧巻!! 向山洋一氏の特別支援対応術島村 雄次郎 解説　日本中の教師が憧れる授業の姿がここにある手塚 美和 ※解説書はPDFファイルにてのご提供です。冊子の郵送はありません。A4判28ページ<br>
+                            伸びやかでダイナミックでしかも高度。それは、超高段の芸である谷 和樹 (玉川大学教職大学院　教授) 1時間目 テープ起こし 解説　子ども達はいったい何のことで討論しているのか根本 直樹 解説　築地氏への提言「強い指導無しに子どもだけで自然に討論は進むことの証明」川原 雅樹 解説　討論が始まるまでに向山型指導のエッセンスがある小貫 義智 解説　圧巻!! 向山洋一氏の特別支援対応術島村 雄次郎 解説　日本中の教師が憧れる授業の姿がここにある手塚 美和 ※解説書はPDFファイルにてのご提供です。冊子の郵送はありません。A4判28ページ
+                            <br>
+                          </p>
+                        </div>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              </section>
+
               <hr class="mt-10" color="#f0f0f0" />
 
               <p
                 v-if="cartItem"
-                class="price -total ma-5"
+                class="price -total"
               >
                 合計：¥{{ totalPrice }}
               </p>
@@ -86,10 +132,10 @@
                       class="creditRadios pl-8 mt-2"
                     >
                       <v-radio
-                        label="カード番号：・・・・ ・・・・ ・・・・ 8686"
+                        label="カード番号：**** **** **** **** 8686"
                         value="existing"
                         color="#838383"
-                        class="subRadio py-1"
+                        class="subRadio"
                         @click="defaultSelected = 'credit'; paymentType = 'credit'"
                       />
                       <v-expansion-panels accordion>
@@ -99,7 +145,7 @@
                               label="新しいクレジットカードを使う"
                               value="new"
                               color="#838383"
-                              class="subRadio py-1"
+                              class="subRadio"
                               @click="defaultSelected = 'credit'; showForm = true"
                             />
                           </v-expansion-panel-header>
@@ -193,7 +239,7 @@
               fluid
               class="cart pa-0"
             >
-              <p class="ml-3">カートにアイテムはありません。</p>
+              <p class="nothing ml-3">カートにアイテムはありません。</p>
             </v-container>
           </transition-group>
         </v-stepper-content>
@@ -229,7 +275,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, SetupContext, toRefs, computed } from "@vue/composition-api"
+import { defineComponent, reactive, SetupContext, toRefs, computed, onMounted } from '@vue/composition-api'
 import MovieList from '@/components/parts/MovieList.vue'
 
 export default defineComponent({
@@ -239,6 +285,7 @@ export default defineComponent({
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
+      isMobile: false,
       stepper: 1,
       loading: false,
       paymentType: 'credit',
@@ -293,6 +340,13 @@ export default defineComponent({
       }
     }
 
+    onMounted(() => {
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
+      }
+    })
+
     return {
       ...toRefs(reactiveState),
       ...methods
@@ -301,7 +355,25 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
+.cart {
+  padding: 60px 40px !important;
+
+  @media (--sm) {
+    padding: 20px 10px !important;
+  }
+}
+
+.cart h2 {
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+
+  @media (--sm) {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+  }
+}
+
 .border-bottom {
   border-bottom: 2px solid #E9E9E9;
 }
@@ -312,10 +384,21 @@ export default defineComponent({
   font-weight: bold;
   letter-spacing: .05em;
   text-align: right;
+
+  @media (--sm) {
+    font-size: 18px;
+    margin-bottom: 4px !important;
+  }
 }
 
 .price.-total {
   font-size: 26px;
+  margin: 20px;
+
+  @media (--sm) {
+    font-size: 18px;
+    margin: 12px 4px;
+  }
 }
 
 .delete {
@@ -323,14 +406,26 @@ export default defineComponent({
   display: block;
   text-align: right;
   text-decoration: underline;
+
+  @media (--sm) {
+    font-size: 10px;
+  }
 }
 
 label {
   color: #333 !important;
+
+  @media (--sm) {
+    font-size: 14px !important;
+  }
 }
 
 form {
   max-width: 600px;
+
+  @media (--sm) {
+    max-width: 100%;
+  }
 }
 
 .v-expansion-panel::before {
@@ -349,6 +444,11 @@ form {
   overflow: hidden;
   position: relative;
   transition: .8s;
+
+  @media (--sm) {
+    font-size: 12px;
+    max-height: 70px;
+  }
 }
 
 .expand::before {
@@ -370,7 +470,7 @@ form {
   border-radius: 50%;
   cursor: pointer;
   display: block;
-  font-size: 12px;
+  font-size: 12px !important;
   margin: auto;
   bottom: 10px;
   left: 0;
@@ -380,6 +480,11 @@ form {
   text-decoration: underline;
   text-transform: uppercase;
   z-index: 15;
+
+  @media (--sm) {
+    font-size: 10px !important;
+    bottom: 20px;
+  }
 }
 
 input[type=checkbox]:checked ~ .expand {
@@ -390,25 +495,35 @@ input[type=checkbox]:checked ~ .expand::before {
   opacity: 0
 }
 
+.subRadio {
+  @media (--not-sm) {
+    padding: 4px 0;
+  }
+}
+
+.nothing {
+  @media (--sm) {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+}
+
 /* step2 */
+.complete h4 {
+  margin-top: 20px;
+}
+
 .complete .text {
   font-size: 14px;
   margin-top: 20px;
   letter-spacing: .02em;
   line-height: 1.8;
   white-space: pre;
-}
 
-/* animation */
-.fade-enter-active,
-.fade-leave-active {
-  opacity: 1;
-  transition: opacity .3s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-  transition: opacity .3s;
+  @media (--sm) {
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
 }
 </style>

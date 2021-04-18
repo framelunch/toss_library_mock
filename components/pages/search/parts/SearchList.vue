@@ -1,5 +1,5 @@
 <template>
-  <div class="searchList py-8 px-10">
+  <div class="searchList">
     <v-row
       v-for="i in 15"
       :key="i"
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
   props: {
@@ -33,7 +33,6 @@ export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      isLoading: false,
       items: [
         {
           image: require('@/assets/images/movie01.png'),
@@ -54,14 +53,6 @@ export default defineComponent({
       ]
     })
 
-    onMounted(() => {
-      reactiveState.isLoading = true
-
-      setTimeout(() => {
-        reactiveState.isLoading = false
-      }, 2000)
-    })
-
     return {
       ...toRefs(reactiveState)
     }
@@ -69,10 +60,30 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
+.searchList {
+  padding: 32px 40px;
+
+  @media (--sm) {
+    padding: 32px 20px;
+  }
+}
+
 .searchList .item {
   cursor: pointer;
   transition: .3s;
+
+  @media (--sm) {
+    display: flex;
+    flex-basis: 100%;
+    padding: 8px !important;
+  }
+}
+
+.searchList .item .image {
+  @media (--sm) {
+    flex-basis: 45%;
+  }
 }
 
 .searchList .item .image img {
@@ -82,6 +93,14 @@ export default defineComponent({
 .searchList .item .title {
   font-size: 14px !important;
   font-weight: bold;
+  margin: 0 !important;
   line-height: 1.8;
+
+  @media (--sm) {
+    flex-basis: 65%;
+    font-size: 12px !important;
+    line-height: 1.6;
+    padding-left: 10px;
+  }
 }
 </style>

@@ -3,40 +3,40 @@
     <Header />
     <Navi />
     <nuxt />
+    <FootNavi v-if="isMobile" />
     <Footer />
   </v-app>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, toRefs, onMounted, watch } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import Header from '@/components/layout/Header.vue'
 import Navi from '@/components/layout/Navi.vue'
+import FootNavi from '@/components/layout/FootNavi.vue'
 import Footer from '@/components/layout/Footer.vue'
 
 export default defineComponent({
   components: {
     Header,
     Navi,
+    FootNavi,
     Footer
   },
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      position: 0
+      isMobile: false
     })
 
-    const methods = {
-    }
-
     onMounted(() => {
-      document.onscroll = (e) => {
-        reactiveState.position = document.documentElement.scrollTop || document.body.scrollTop
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
       }
     })
 
     return {
-      ...toRefs(reactiveState),
-      ...methods
+      ...toRefs(reactiveState)
     }
   }
 })

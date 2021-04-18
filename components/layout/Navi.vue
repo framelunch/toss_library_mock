@@ -1,7 +1,7 @@
 <template>
   <div wrap class="navi">
     <div class="navi__inner">
-      <div class="plan">
+      <div class="plan not-sm-only">
         <v-chip class="ma-1" small dark color="#e764aa">フリープラン</v-chip>
       </div>
 
@@ -16,38 +16,15 @@
         />
       </div>
 
-      <div class="btn-wrap">
+      <div class="btn-wrap not-sm-only">
         <v-btn
+          v-for="(btn, i) in btns"
+          :key="i"
           text
-          to="/"
+          :to="btn.to"
           nuxt
-          :ripple="false"
         >
-          ホーム
-        </v-btn>
-        <v-btn
-          text
-          to="/search"
-          nuxt
-          :ripple="false"
-        >
-          探す
-        </v-btn>
-        <v-btn
-          text
-          to="/cart"
-          nuxt
-          :ripple="false"
-        >
-          カート
-        </v-btn>
-        <v-btn
-          text
-          to="/mypage"
-          nuxt
-          :ripple="false"
-        >
-          マイページ
+          {{ btn.name }}
         </v-btn>
       </div>
     </div>
@@ -55,27 +32,48 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 
 export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
+      isMobile: false,
+      btns: [
+        {
+          name: 'ホーム',
+          to: '/'
+        },
+        {
+          name: '探す',
+          to: '/search'
+        },
+        {
+          name: 'カート',
+          to: '/cart'
+        },
+        {
+          name: 'マイページ',
+          to: '/mypage'
+        }
+      ]
     })
 
-    /* Methods */
-    const methods = {
-    }
+    onMounted(() => {
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
+      }
+    })
 
     return {
-      ...toRefs(reactiveState),
-      ...methods
+      ...toRefs(reactiveState)
     }
   }
 })
 </script>
 
-<style>
+<style lang="postcss">
 .navi {
   background-color: #333333;
   margin-top: 60px;
@@ -83,7 +81,7 @@ export default defineComponent({
   top: 60px;
   height: 48px;
   width: 100%;
-  z-index: 100;
+  z-index: 2;
 }
 
 .navi .navi__inner {
@@ -101,6 +99,10 @@ export default defineComponent({
   right: 0;
   margin: auto;
   width: 400px;
+
+  @media (--sm) {
+    width: 90%;
+  }
 }
 
 .navi .searchbox .v-text-field .v-input__slot {
@@ -118,7 +120,11 @@ export default defineComponent({
   margin-top: 4px !important;
 }
 
-.btn-wrap .v-btn {
+.navi .v-btn {
   color: #fff;
+}
+
+.navi .v-btn:before {
+  content: none;
 }
 </style>

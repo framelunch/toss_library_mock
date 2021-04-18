@@ -31,6 +31,9 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/variables.css', // 変数定義
+    '@/assets/css/common.css', // 共通
+    '@/assets/css/keyframe.css' // アニメーション
   ],
   /*
   ** Plugins to load before mounting the App
@@ -94,6 +97,11 @@ export default {
         'postcss-preset-env': {
           stage: 0,
           importFrom: './assets/css/variables.css'
+        }
+      },
+      preset: {
+        features: {
+          'nesting-rules': true
         }
       }
     }

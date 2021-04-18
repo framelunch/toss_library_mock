@@ -1,10 +1,10 @@
 <template>
-  <v-main class="pa-0">
+  <v-main class="search px-0">
     <v-container
       fluid
-      class="search pt-15 px-0"
+      class="pa-0"
     >
-      <div class="pb-3 search__head">
+      <div v-if="!isMobile" class="pb-3 search__head">
         <v-row class="justify-space-between">
           <v-col
             class="d-flex justify-center menu all"
@@ -118,42 +118,52 @@
           </v-col>
         </v-row>
       </div>
+      <div v-else class="pb-3 search__head">
+        <v-expansion-panels accordion>
+          <v-expansion-panel
+            v-for="(item,i) in 5"
+            :key="i"
+          >
+            <v-expansion-panel-header>Item</v-expansion-panel-header>
+            <v-expansion-panel-content>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </div>
 
       <div
         class="search__body"
         @click="hiddenDetail"
       >
-        <div class="title pl-10  mb-8">
+        <div class="title">
           <h2>
             {{ title }}
             <span>の動画とセミナー</span>
           </h2>
-          <p v-if="!showAll" class="number mt-1">（全60件）</p>
+          <p class="number">（全60件）</p>
         </div>
-
-        <search-all v-if="showAll" />
-        <search-part v-else />
+        <search-result />
       </div>
     </v-container>
   </v-main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, SetupContext } from "@vue/composition-api"
-import SearchAll from '@/components/pages/search/SearchAll.vue'
-import SearchPart from '@/components/pages/search/SearchPart.vue'
+import { defineComponent, reactive, toRefs, onMounted, SetupContext } from '@vue/composition-api'
+import SearchResult from '@/components/pages/search/SearchResult.vue'
 
 export default defineComponent({
   components: {
-    SearchAll,
-    SearchPart
+    SearchResult
   },
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
+      isMobile: false,
       query: {},
       hash: '',
-      showAll: true,
+      all: true,
       title: '全て',
       headMenu: [
         {
@@ -271,39 +281,37 @@ export default defineComponent({
       selectAll () {
         context.root.$router.push('search')
         reactiveState.title = '全て'
-        reactiveState.showAll = true
       },
       selectTeacher () {
         context.root.$router.push({path: 'search', query: { teacher: 'my' } })
         reactiveState.title = '向山 洋一先生'
-        reactiveState.showAll = false
       },
       selectSubject () {
         context.root.$router.push({path: 'search', query: { subject: 'lang' } })
         reactiveState.title = '国語'
-        reactiveState.showAll = false
       },
       selectCategory () {
         context.root.$router.push({path: 'search', query: { category: 'special' } })
         reactiveState.title = '特別支援教育'
-        reactiveState.showAll = false
       },
       selectPlan () {
         context.root.$router.push({path: 'search', query: { plan: 'free' } })
         reactiveState.title = 'フリープラン'
-        reactiveState.showAll = false
       }
     }
 
     onMounted(() => {
+      const width = window.outerWidth
+      if (width <= 959) {
+        reactiveState.isMobile = true
+      }
+
       const query = context.root.$route.query
       const hash = context.root.$route.hash
       reactiveState.query = query
       reactiveState.hash = hash
 
       if (query) {
-        reactiveState.showAll = false
-
         if (query.teacher) {
           reactiveState.title = '向山 洋一先生'
 
@@ -333,15 +341,40 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
 .search {
-  height: 100vh;
-  overflow-y: auto;
-  width: 100%;
+  @media (--sm) {
+    padding-top: 0 !important;
+  }
+}
+
+.search h2 {
+  @media (--sm) {
+    font-size: 20px;
+  }
 }
 
 .search h2 span {
   font-weight: normal;
+}
+
+.search .search__body .title {
+  margin-bottom: 20px;
+  margin-left: 40px;
+
+  @media (--sm) {
+    margin-bottom: 80px;
+    margin-left: 10px;
+  }
+}
+
+.search .number {
+  margin-top: 4px;
+
+  @media (--sm) {
+    font-size: 14px;
+    margin-top: 0;
+  }
 }
 
 .search__head {
@@ -439,17 +472,5 @@ export default defineComponent({
   cursor: pointer;
   flex-basis: 100% !important;
   transition: .15s;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  opacity: 1;
-  transition: opacity .3s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-  transition: opacity .3s;
 }
 </style>

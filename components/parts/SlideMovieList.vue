@@ -9,7 +9,7 @@
           <figure class="image">
             <img :src="item.image" alt="">
           </figure>
-          <p class="title">
+          <p class="title mb-0">
             {{ item.title }}
           </p>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
   setup (_) {
@@ -80,7 +80,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
 .slideMovieList .slide__inner {
   cursor: pointer;
   transition: .3s;
@@ -99,7 +99,7 @@ export default defineComponent({
 /* Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  top: 32%;
+  top: 45%;
 }
 
 .swiper-button-prev {
