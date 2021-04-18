@@ -360,7 +360,7 @@ export default defineComponent({
   padding: 60px 40px !important;
 
   @media (--sm) {
-    padding: 20px 10px !important;
+    padding: 20px 10px 30px !important;
   }
 }
 

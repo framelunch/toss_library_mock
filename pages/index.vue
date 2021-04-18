@@ -1,14 +1,14 @@
 <template>
-  <v-main class="mb-10 pa-0">
-    <v-container fluid class="top pa-0">
+  <v-main class="top px-0">
+    <v-container fluid class="pa-0">
       <!-- MV -->
       <MV />
       <!-- 新着動画 -->
-      <new-movies :is-mobile="isMobile" />
+      <new :is-mobile="isMobile" />
       <!-- おすすめ -->
-      <recomend-movies :is-mobile="isMobile" />
+      <recomend :is-mobile="isMobile" />
       <!-- 再生履歴 -->
-      <playback-history :is-mobile="isMobile" />
+      <history :is-mobile="isMobile" />
       <!-- 先生から探す -->
       <teachers :is-mobile="isMobile" />
       <!-- 教科から探す -->
@@ -20,18 +20,18 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import MV from '@/components/pages/top/MV.vue'
-import NewMovies from '@/components/pages/top/NewMovies.vue'
-import RecomendMovies from '@/components/pages/top/RecomendMovies.vue'
-import PlaybackHistory from '@/components/pages/top/PlaybackHistory.vue'
+import New from '~/components/pages/top/New.vue'
+import Recomend from '@/components/pages/top/Recomend.vue'
+import History from '@/components/pages/top/History.vue'
 import Teachers from '~/components/pages/top/Teachers.vue'
 import Subjects from '~/components/pages/top/Subjects.vue'
 
 export default defineComponent({
   components: {
     MV,
-    NewMovies,
-    RecomendMovies,
-    PlaybackHistory,
+    New,
+    Recomend,
+    History,
     Teachers,
     Subjects
   },
@@ -56,6 +56,15 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
+.top {
+  padding-bottom: 60px !important;
+
+  @media (--sm) {
+    padding-top: 0 !important;
+    padding-bottom: 30px !important;
+  }
+}
+
 section.list {
   margin-top: 40px;
   padding-left: 40px;
@@ -78,6 +87,24 @@ section.list .list__head.sm-only {
   margin-bottom: 8px;
 }
 
+section.list .list__head h2 {
+  @media (--sm) {
+    font-size: 18px;
+  }
+}
+
+section.list .list__head small {
+  color: #64b5f6;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 20px;
+  transition: .15s;
+
+  @media (--sm) {
+    font-size: 12px;
+  }
+}
+
 .selectBox {
   margin-left: 20px;
   width: 180px;
@@ -94,24 +121,6 @@ section.list .list__head.sm-only {
 }
 
 .selectBox .v-select__selection {
-  @media (--sm) {
-    font-size: 12px;
-  }
-}
-
-section.list .list__head h2 {
-  @media (--sm) {
-    font-size: 18px;
-  }
-}
-
-section.list .list__head small {
-  color: #64b5f6;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 20px;
-  transition: .15s;
-
   @media (--sm) {
     font-size: 12px;
   }

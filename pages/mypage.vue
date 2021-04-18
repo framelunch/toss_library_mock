@@ -1,7 +1,7 @@
 <template>
   <v-main class="mypage">
-    <v-container fluid>
-      <section class="playbackHistory">
+    <v-container fluid class="pa-0">
+      <section class="history">
         <div class="list__head mb-6">
           <h2>再生履歴</h2>
         </div>
@@ -68,11 +68,33 @@ export default defineComponent({
 
 <style>
 .mypage {
-  padding: 60px 40px !important;
+  padding: 60px 0 !important;
 
   @media (--sm) {
-    padding: 20px 10px !important;
+    padding: 20px 0 30px !important;
   }
 }
 
+.search {
+  padding-bottom: 60px !important;
+
+  @media (--sm) {
+    padding-top: 0 !important;
+    padding-bottom: 30px !important;
+  }
+}
+
+.mypage section {
+  padding: 0 40px;
+
+  @media (--sm) {
+    padding: 0 20px;
+  }
+}
+
+.mypage section.history {
+  @media (--not-sm) {
+    padding-right: 0;
+  }
+}
 </style>

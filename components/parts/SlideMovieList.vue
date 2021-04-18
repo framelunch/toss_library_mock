@@ -29,7 +29,7 @@ export default defineComponent({
     const reactiveState = reactive({
       swiperOption: {
         delay: 1000,
-        slidesPerView: 5,
+        slidesPerView: 4.15,
         spaceBetween: 20,
         loop: false,
         navigation: {
@@ -103,11 +103,11 @@ export default defineComponent({
 }
 
 .swiper-button-prev {
-  left: 15px;
+  left: 10px;
 }
 
 .swiper-button-next {
-  right: 15px;
+  right: 10px;
 }
 
 .swiper-button-prev:after,

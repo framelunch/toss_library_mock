@@ -1,8 +1,8 @@
 <template>
-  <!-- 再生履歴 -->
-  <section class="list -playbackHistory">
+  <!-- おすすめ動画 -->
+  <section class="list recomend">
     <div class="list__head">
-      <h2>再生履歴</h2>
+      <h2>おすすめ</h2>
       <small @click="toSearch">一覧を見る</small>
     </div>
     <div v-if="!isMobile" class="list__body">
@@ -34,7 +34,7 @@ export default defineComponent({
     /* Methods */
     const methods = {
       toSearch () {
-        context.root.$router.push({path: 'search', hash: 'history' })
+        context.root.$router.push({path: 'search', hash: 'recomend' })
       }
     }
 

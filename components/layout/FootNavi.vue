@@ -1,5 +1,5 @@
 <template>
-  <div class="footNavi pa-3">
+  <div class="footNavi pa-2">
     <div class="footNavi__inner">
       <v-row>
         <v-col

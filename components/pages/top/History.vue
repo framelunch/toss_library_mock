@@ -1,8 +1,8 @@
 <template>
-  <!-- 新着動画 -->
-  <section class="list -new">
+  <!-- 再生履歴 -->
+  <section class="list history">
     <div class="list__head">
-      <h2>新着動画</h2>
+      <h2>再生履歴</h2>
       <small @click="toSearch">一覧を見る</small>
     </div>
     <div v-if="!isMobile" class="list__body">
@@ -34,7 +34,7 @@ export default defineComponent({
     /* Methods */
     const methods = {
       toSearch () {
-        context.root.$router.push({path: 'search', hash: 'new' })
+        context.root.$router.push({path: 'search', hash: 'history' })
       }
     }
 
@@ -44,13 +44,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="postcss">
-.list.-new {
-  margin-top: 60px;
-
-  @media (--sm) {
-    margin-top: 40px;
-  }
-}
-</style>

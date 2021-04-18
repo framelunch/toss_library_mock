@@ -343,8 +343,11 @@ export default defineComponent({
 
 <style lang="postcss">
 .search {
+  padding-bottom: 60px !important;
+
   @media (--sm) {
     padding-top: 0 !important;
+    padding-bottom: 30px !important;
   }
 }
 

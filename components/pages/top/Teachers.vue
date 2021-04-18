@@ -1,6 +1,6 @@
 <template>
   <!-- 先生から探す -->
-  <section class="list -teachers">
+  <section class="list teachers">
     <div class="list__head not-sm-only">
       <h2>先生から探す</h2>
       <div class="selectBox">
@@ -82,13 +82,9 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.list.-teachers {
+.list.teachers {
   @media (--sm) {
     padding-right: 0;
   }
-}
-
-.list__head.sm-only {
-  margin-bottom: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <!-- 教科から探す -->
-  <section class="list -subjects">
+  <section class="list subjects">
     <div class="list__head not-sm-only">
       <h2>教科から探す</h2>
       <div class="selectBox">
