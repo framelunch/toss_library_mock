@@ -85,7 +85,8 @@ export default defineComponent({
     flex-basis: 65%;
     font-size: 12px !important;
     line-height: 1.6;
-    padding-left: 10px;
+    padding-top: 4px;
+    padding-left: 12px;
   }
 }
 </style>

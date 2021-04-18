@@ -23,7 +23,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="postcss">
 /* ローディングアニメーション */
 .loading {
   align-items: center;
@@ -35,6 +35,10 @@ export default defineComponent({
   height: 10vw;
   width: 100%;
   z-index: 0;
+
+  @media (--sm) {
+    top: 10vw;
+  }
 }
 
 .mainspin {
@@ -42,5 +46,10 @@ export default defineComponent({
   fill: #e4e4e4;
 	height: 10vw;
 	width: 10vw;
+
+  @media (--sm) {
+    height: 20vw;
+    width: 20vw;
+  }
 }
 </style>

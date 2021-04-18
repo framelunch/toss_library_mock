@@ -103,7 +103,7 @@ export default defineComponent({
   width: 180px;
 
   @media (--sm) {
-    top: -70px;
+    top: -60px;
     right: auto;
     left: 0;
     width: 160px;

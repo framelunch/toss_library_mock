@@ -374,6 +374,7 @@ export default defineComponent({
   @media (--sm) {
     font-size: 14px;
     margin-top: 0;
+    line-height: 1.6;
   }
 }
 

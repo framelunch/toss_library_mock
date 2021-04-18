@@ -11,7 +11,7 @@
         :key="i"
       >
         <v-sheet
-          color="#E9E9E9"
+          color="#D3D3D3"
           height="100%"
         >
         </v-sheet>
@@ -54,7 +54,7 @@
   @media (--sm) {
     color: #fff;
     top: auto;
-    bottom: 60px;
+    bottom: 40px;
     left: 20px;
   }
 }

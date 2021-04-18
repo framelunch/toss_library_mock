@@ -84,7 +84,7 @@ section.list .list__head.sm-only {
 
   @media (--sm) {
     margin-left: 10px;
-    width: 140px;
+    width: 160px;
   }
 }
 
@@ -100,8 +100,6 @@ section.list .list__head.sm-only {
 }
 
 section.list .list__head h2 {
-  font-weight: normal;
-
   @media (--sm) {
     font-size: 18px;
   }
