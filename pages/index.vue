@@ -1,5 +1,5 @@
 <template>
-  <v-main class="top px-0">
+  <v-main class="top pt-0 px-0">
     <v-container fluid class="pa-0">
       <!-- MV -->
       <MV />

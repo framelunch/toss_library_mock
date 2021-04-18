@@ -75,15 +75,6 @@ export default defineComponent({
   }
 }
 
-.search {
-  padding-bottom: 60px !important;
-
-  @media (--sm) {
-    padding-top: 0 !important;
-    padding-bottom: 30px !important;
-  }
-}
-
 .mypage section {
   padding: 0 40px;
 
@@ -95,6 +86,14 @@ export default defineComponent({
 .mypage section.history {
   @media (--not-sm) {
     padding-right: 0;
+  }
+}
+
+.mypage hr {
+  margin: 0 40px;
+
+  @media (--sm) {
+    margin: 0 20px;
   }
 }
 </style>
