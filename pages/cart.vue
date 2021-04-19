@@ -220,7 +220,7 @@
                   <v-btn
                     class="d-flex mx-auto my-5 pa-6"
                     outlined
-                    color="primary darken-2"
+                    color="#333"
                     width="280"
                     :loading="loading"
                     @click="complete"
@@ -237,7 +237,7 @@
               fluid
               class="cart pa-0"
             >
-              <p class="nothing ml-3">カートにアイテムはありません。</p>
+              <p class="nothing_text my-5 ml-3">カートにアイテムはありません。</p>
             </v-container>
           </transition-group>
         </v-stepper-content>
@@ -255,8 +255,10 @@
                 class="d-flex mx-auto pa-4"
                 outlined
                 rounded
-                color="#707070"
+                color="#333"
                 width="150"
+                to="/mypage"
+                nuxt
               >
                 今すぐ見る
               </v-btn>
@@ -486,6 +488,8 @@ input[type=checkbox]:checked ~ .expand::before {
 
 .payment {
   margin-top: 60px;
+  margin-left: auto;
+  width: 95%;
 
   @media (--sm) {
     margin-top: 40px;
@@ -495,13 +499,6 @@ input[type=checkbox]:checked ~ .expand::before {
 .subRadio {
   @media (--not-sm) {
     padding: 4px 0;
-  }
-}
-
-.nothing {
-  @media (--sm) {
-    font-size: 14px;
-    margin-top: 20px;
   }
 }
 

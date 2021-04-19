@@ -1,9 +1,6 @@
 <template>
   <v-main class="search px-0">
-    <v-container
-      fluid
-      class="pa-0"
-    >
+    <v-container fluid class="pa-0">
       <div class="pb-3 search__head not-sm-only">
         <v-row class="justify-space-between">
           <v-col
@@ -145,7 +142,7 @@
               <ul class="detailMenu -subject pl-0">
                 <li
                   v-for="subject in subjects"
-                  :key="subject"
+                  :key="subject.id"
                   class="py-3 px-6"
                   @click="selectSubject(subject)"
                 >
@@ -195,33 +192,36 @@
         class="search__body"
         @click="hiddenDetail"
       >
-        <div class="title">
-          <h2>
-            {{ title }}
-            <span>の動画とセミナー</span>
-          </h2>
-          <p class="number">（全60件）</p>
-        </div>
-        <search-result />
+        <h2>
+          {{ title }}
+          <span>の動画とセミナー</span>
+        </h2>
+        <p class="number">（全60件）</p>
+        <search-all v-if="isAll" />
+        <search-result v-else ref="searchResultRef" />
       </div>
     </v-container>
   </v-main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, SetupContext } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, onMounted, SetupContext, ref } from '@vue/composition-api'
+import SearchAll from '@/components/pages/search/SearchAll.vue'
 import SearchResult from '@/components/pages/search/SearchResult.vue'
 
 export default defineComponent({
   components: {
+    SearchAll,
     SearchResult
   },
   setup (_, context: SetupContext) {
+    const searchResultRef = ref()
+
     /* Reactive State */
     const reactiveState = reactive({
       query: {},
       hash: '',
-      all: true,
+      isAll: false,
       title: '全て',
       headMenu: [
         {
@@ -444,24 +444,50 @@ export default defineComponent({
         reactiveState.showDetailMenu.category = false
       },
       selectAll () {
+        reactiveState.isAll = true
         context.root.$router.push('search')
         reactiveState.title = '全て'
+
+        reactiveState.showDetailMenu.teacher = false
+        reactiveState.showDetailMenu.subject = false
+        reactiveState.showDetailMenu.category = false
+        reactiveState.showDetailMenu.plan = false
       },
       selectTeacher (teacher: any) {
+        reactiveState.isAll = false
         context.root.$router.push({path: 'search', query: { category: `${ teacher.value }` } })
         reactiveState.title = `${ teacher.name }`
+
+        if (searchResultRef.value) {
+          return searchResultRef.value.load()
+        }
       },
       selectSubject (subject: any) {
+        reactiveState.isAll = false
         context.root.$router.push({path: 'search', query: { category: `${ subject.value }` } })
         reactiveState.title = `${ subject.name }`
+
+        if (searchResultRef.value) {
+          return searchResultRef.value.load()
+        }
       },
       selectCategory (category: any) {
+        reactiveState.isAll = false
         context.root.$router.push({path: 'search', query: { category: `${ category.value }` } })
         reactiveState.title = `${ category.name }`
+
+        if (searchResultRef.value) {
+          return searchResultRef.value.load()
+        }
       },
       selectPlan (plan: any) {
+        reactiveState.isAll = false
         context.root.$router.push({path: 'search', query: { plan: `${ plan.value }` } })
         reactiveState.title = `${ plan.name }`
+
+        if (searchResultRef.value) {
+          return searchResultRef.value.load()
+        }
       }
     }
 
@@ -471,7 +497,7 @@ export default defineComponent({
       reactiveState.query = query
       reactiveState.hash = hash
 
-      if (query) {
+      if (query) { // URLにqueryがある場合
         switch (query.teacher) {
           case 'te01':
             reactiveState.title = '向山 洋一先生'
@@ -601,22 +627,24 @@ export default defineComponent({
         }
       }
 
-      if (hash) {
+      if (hash) { // URLにhashがある場合
         if (hash.includes('new')) {
-          reactiveState.title = '新着動画'
+          reactiveState.title = '新着'
 
         } else if (hash.includes('recomend')) {
           reactiveState.title = 'あなたへのおすすめ'
 
         } else if (hash.includes('history')) {
           reactiveState.title = '再生履歴'
+          reactiveState.isAll = true
         }
       }
     })
 
     return {
       ...toRefs(reactiveState),
-      ...methods
+      ...methods,
+      searchResultRef
     }
   }
 })
@@ -633,8 +661,11 @@ export default defineComponent({
 }
 
 .search h2 {
+  margin-left: 40px;
+
   @media (--sm) {
     margin-bottom: 0 !important;
+    margin-left: 12px;
   }
 }
 
@@ -643,31 +674,39 @@ export default defineComponent({
   font-weight: normal;
 }
 
-.search .search__body .title {
+.search .number {
   margin-bottom: 20px;
   margin-left: 40px;
 
   @media (--sm) {
-    margin-bottom: 80px;
-    margin-left: 12px;
-  }
-}
-
-.search .number {
-  margin-top: 4px;
-
-  @media (--sm) {
     font-size: 12px;
     margin-top: 0;
+    margin-bottom: 12px;
+    margin-left: 12px;
     line-height: 1.6;
   }
 }
 
 .search__head {
   @media (--not-sm) {
-    border-bottom: 2px solid #E9E9E9;
     margin: 0 auto 40px;
     max-width: 900px;
+    position: relative;
+  }
+}
+
+.search__head::after {
+  @media (--not-sm) {
+    content: '';
+    display: block;
+    background-color: #909090;
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    width: 95%;
   }
 }
 

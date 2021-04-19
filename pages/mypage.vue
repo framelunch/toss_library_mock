@@ -5,12 +5,13 @@
         <div class="list__head">
           <h2>再生履歴</h2>
         </div>
-        <div v-if="!isMobile" class="list__body">
+        <!-- <p class="nothing_text my-5 ml-3">再生履歴はありません。</p> -->
+        <v-container v-if="!isMobile" fluid class="list__body pa-0">
           <slide-movie-list />
-        </div>
-        <div v-else class="list__body">
+        </v-container>
+        <v-container v-else fluid class="list__body pa-0">
           <slide-movie-list-sp />
-        </div>
+        </v-container>
       </section>
 
       <hr class="my-10 not-sm-only" color="#C8C8C8" />
@@ -20,7 +21,9 @@
           <h2>お気に入り</h2>
           <small>（全8件）</small>
         </div>
-        <movie-list />
+        <v-container fluid class="list__body pa-0">
+          <movie-list />
+        </v-container>
       </section>
 
       <hr class="my-10 not-sm-only" color="#C8C8C8" />
@@ -30,7 +33,9 @@
           <h2>購入動画</h2>
           <small>（全8件）</small>
         </div>
-        <movie-list />
+        <v-container fluid class="list__body pa-0">
+          <movie-list />
+        </v-container>
       </section>
 
       <section class="sm-only">
@@ -40,7 +45,9 @@
               お気に入り
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <movie-list />
+              <v-container fluid class="list__body pa-0">
+                <movie-list />
+              </v-container>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -49,7 +56,9 @@
               購入動画
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <movie-list />
+              <v-container fluid class="list__body pa-0">
+                <movie-list />
+              </v-container>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -116,6 +125,8 @@ export default defineComponent({
 }
 
 .mypage .history {
+  padding-right: 0;
+
   @media (--sm) {
     margin-bottom: 20px;
     padding-left: 20px;
@@ -134,6 +145,10 @@ export default defineComponent({
   border-radius: 0 !important;
 }
 
+.mypage .v-expansion-panels .v-expansion-panel:not(:first-child)::after {
+  border-color: #C0C0C0;
+}
+
 .mypage .v-expansion-panel .v-expansion-panel-header {
   font-weight: bold;
 }
@@ -148,11 +163,11 @@ export default defineComponent({
 }
 
 .mypage .v-expansion-panel--active > .v-expansion-panel-header {
-  background-color: #F5F5F5 !important;
-  min-height: auto;
+  border-bottom: none !important;
 }
 
-.mypage .v-expansion-panel--active.favorite > .v-expansion-panel-header {
-  border-bottom: 1px solid #C0C0C0;
+.mypage .v-expansion-panel--active > .v-expansion-panel-header {
+  background-color: #F5F5F5 !important;
+  min-height: auto;
 }
 </style>

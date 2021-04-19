@@ -65,7 +65,7 @@ export default defineComponent({
     /* Reactive State */
     const reactiveState = reactive({
       subjects: [ '国語', '算数', '社会', '理科', '生活', '音楽', '図画工作・美術', '体育' ],
-      selectedValue: ''
+      selectedValue: 'lang',
     })
 
     /* Methods */

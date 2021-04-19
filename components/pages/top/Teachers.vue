@@ -66,7 +66,7 @@ export default defineComponent({
     /* Reactive State */
     const reactiveState = reactive({
       teachers: [ '向山 洋一', '谷 和樹', '河田 孝文', '小嶋 悠紀', '小野 隆行', '長谷川 博之', '石坂 陽', '向山 行雄', '特別講師' ],
-      selectedValue: ''
+      selectedValue: 'te01'
     })
 
     /* Methods */

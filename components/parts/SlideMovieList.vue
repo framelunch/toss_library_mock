@@ -30,8 +30,8 @@ export default defineComponent({
       swiperOption: {
         delay: 1000,
         slidesPerView: 4.15,
-        spaceBetween: 20,
-        loop: false,
+        spaceBetween: 24,
+        freemode: true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -103,25 +103,20 @@ export default defineComponent({
 }
 
 .swiper-button-prev {
-  left: 10px;
-
-  @media (--sm) {
-    display: none;
-  }
+  left: 5%;
 }
 
 .swiper-button-next {
-  right: 10px;
+  right: 5%;
 }
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
   content: '';
-  border-top: 4px solid #fff;
-  border-right: 4px solid #fff;
-  border-radius: 2px;
-  height: 26px;
-  width: 40px;
+  border-top: 5px solid #fff;
+  border-right: 5px solid #fff;
+  height: 28px;
+  width: 44px;
   transform: rotate(45deg);
 }
 

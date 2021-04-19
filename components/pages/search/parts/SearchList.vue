@@ -62,7 +62,7 @@ export default defineComponent({
 
 <style lang="postcss">
 .searchList {
-  padding: 32px 40px;
+  padding: 20px 40px;
 
   @media (--sm) {
     padding: 20px 20px 0 20px;

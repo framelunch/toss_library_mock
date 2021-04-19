@@ -30,8 +30,9 @@
 
 <style lang="postcss">
 .mv {
-  height: 500px;
+  height: 400px;
   position: relative;
+  overflow: hidden;
 
   @media (--sm) {
     height: 300px;

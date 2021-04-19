@@ -81,6 +81,12 @@ section.list .list__head {
   margin-bottom: 20px;
 }
 
+section.list.teacher .list__head {
+  @media (--not-sm) {
+    margin-bottom: 28px;
+  }
+}
+
 section.list.teacher .list__head,
 section.list.subject .list__head {
   @media (--sm) {

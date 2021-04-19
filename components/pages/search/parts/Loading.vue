@@ -37,7 +37,8 @@ export default defineComponent({
   z-index: 0;
 
   @media (--sm) {
-    top: 10vw;
+    height: 8vw;
+    top: 15vw;
   }
 }
 

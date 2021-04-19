@@ -8,6 +8,7 @@
       <div class="searchbox">
         <v-text-field
           dense
+          color="#e764aa"
           hide-details=""
           label=""
           placeholder="向山洋一, 雪国のくらし, ごんぎつね, etc"
@@ -117,6 +118,10 @@ export default defineComponent({
 
 .navi .searchbox .v-text-field .v-input__append-inner {
   margin-top: 4px !important;
+}
+
+.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:after {
+  content: none;
 }
 
 .navi .v-btn {

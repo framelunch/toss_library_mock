@@ -9,6 +9,7 @@
         hide-details=""
         dense
         outlined
+        color="#e764aa"
         @change="changeValue"
       />
     </div>
@@ -17,7 +18,7 @@
       v-model="tab"
       background-color="transparent"
       grow
-      color="#808080"
+      color="#707070"
       class="tabs"
     >
       <v-tab
@@ -33,14 +34,20 @@
         v-for="(item, i) in items"
         :key="i"
       >
-        <search-list
-          v-if="!isLoading"
-          :is-loading="isLoading"
-        />
-        <loading
-          v-else
-          :is-loading="isLoading"
-        />
+        <v-container fluid class="pa-0">
+          <transition-group name="fade" appear>
+            <search-list
+              v-if="!isLoading"
+              key="list"
+              :is-loading="isLoading"
+            />
+            <loading
+              v-else
+              key="loading"
+              :is-loading="isLoading"
+            />
+          </transition-group>
+        </v-container>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -92,20 +99,22 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.searchResult {
+.searchResult .container {
   position: relative;
 }
 
 .selectBox.-sort {
-  position: absolute;
-  top: -10px;
-  right: 40px;
+  margin-left: auto;
+  margin-right: 40px;
   width: 180px;
 
+  @media (--not-sm) {
+    margin-bottom: -36px;
+  }
+
   @media (--sm) {
-    top: -60px;
-    right: auto;
-    left: 12px;
+    margin-left: 12px;
+    margin-right: auto;
     width: 160px;
   }
 }
@@ -118,8 +127,20 @@ export default defineComponent({
   }
 }
 
+.selectBox.-sort input {
+  color: #707070;
+}
+
 .selectBox.-sort input::placeholder {
   color: #909090 !important;
+}
+
+.v-list-item--link:before {
+  background-color: #e764aa !important;
+}
+
+.v-list-item__title {
+  color: #333 !important;
 }
 
 .tabs {
@@ -133,13 +154,17 @@ export default defineComponent({
 }
 
 .tabs .v-tab.v-tab--active {
-  border-top: 1px solid #C3C3C3;
-  border-left: 1px solid #C3C3C3;
-  border-right: 1px solid #C3C3C3;
+  border-top: 1px solid #909090;
+  border-left: 1px solid #909090;
+  border-right: 1px solid #909090;
   position: relative;
 }
 
+.tabs .v-tab {
+  color: #707070;
+}
+
 .tabItems {
-  border-top: 1px solid #C3C3C3;
+  border-top: 1px solid #909090;
 }
 </style>
