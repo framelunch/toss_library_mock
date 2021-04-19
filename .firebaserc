@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "guinness-93dba"
+  },
+  "targets": {
+    "guinness-93dba": {
+      "hosting": {
+        "mock-library": [
+          "mock-library"
+        ]
+      }
+    }
+  }
+}
