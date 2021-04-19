@@ -1,5 +1,5 @@
 <template>
-  <div class="searchPart">
+  <div class="searchResult">
     <div class="selectBox -sort">
       <v-select
         :items="sortItems"
@@ -92,7 +92,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.searchPart {
+.searchResult {
   position: relative;
 }
 
@@ -105,7 +105,7 @@ export default defineComponent({
   @media (--sm) {
     top: -60px;
     right: auto;
-    left: 0;
+    left: 12px;
     width: 160px;
   }
 }

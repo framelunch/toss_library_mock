@@ -1,6 +1,6 @@
 <template>
   <v-main class="cart">
-    <h2 class="border-bottom">
+    <h2 class="pb-3 border-bottom">
       カート
     </h2>
     <v-stepper
@@ -16,7 +16,7 @@
               key="item"
               fluid
             >
-              <section v-if="!isMobile" class="cartItem">
+              <section class="cartItem not-sm-only">
                 <v-card class="pa-5" style="box-shadow: none !important;">
                   <v-row class="flex-row align-start">
                     <v-col width="40%">
@@ -31,10 +31,9 @@
                         <input id="leer2" type="checkbox"/>
                         <label
                           for="leer2"
-                          :class="{ '-open':isOpenTextBox }"
                           @click="openTextBox"
                         >
-                          もっと見る
+                          {{ toggleLabel }}
                         </label>
                         <div class="expand">
                           <p class="text mb-0">
@@ -59,14 +58,14 @@
                 </v-card>
               </section>
 
-              <section v-else class="cartItem">
+              <section class="cartItem sm-only">
                 <v-card style="box-shadow: none !important;">
-                  <v-card-title class="px-0">
+                  <v-card-title class="py-2 px-0">
                     雪国のくらし
                   </v-card-title>
                   <v-row class="flex-row align-start">
                     <v-col style="flex-basis: 30%;">
-                      <img src="~/assets/images/cart_image.png" alt="" width="90%">
+                      <img src="~/assets/images/cart_image.png" alt="" width="100%">
                     </v-col>
                     <v-col>
                       <v-card-text class="px-0">
@@ -88,10 +87,9 @@
                         <input id="leer2" type="checkbox"/>
                         <label
                           for="leer2"
-                          :class="{ '-open':isOpenTextBox }"
                           @click="openTextBox"
                         >
-                          もっと見る
+                          {{ toggleLabel }}
                         </label>
                         <div class="expand">
                           <p class="text mb-0">
@@ -115,7 +113,7 @@
                 合計：¥{{ totalPrice }}
               </p>
 
-              <section class="payment mt-15">
+              <section class="payment">
                 <div class="payment__inner">
                   <h3 class="pb-3 mb-2 border-bottom">
                     お支払い方法
@@ -140,7 +138,7 @@
                       />
                       <v-expansion-panels accordion>
                         <v-expansion-panel>
-                          <v-expansion-panel-header class="pa-0">
+                          <v-expansion-panel-header class="pa-0" expand-icon="">
                             <v-radio
                               label="新しいクレジットカードを使う"
                               value="new"
@@ -198,12 +196,12 @@
                       style="border-top: 2px solid #E9E9E9; border-bottom: 2px solid #E9E9E9"
                     >
                       <v-expansion-panel>
-                        <v-expansion-panel-header class="pa-0">
+                        <v-expansion-panel-header class="pa-0" expand-icon="">
                           <v-radio
                             label="銀行振り込み"
                             value="bank"
                             color="#838383"
-                            class="mainRadio py-5 mb-0"
+                            class="mainRadio py-4 mb-0"
                             @click="paymentType = 'bank'; defaultCreditSelected = ''"
                           />
                         </v-expansion-panel-header>
@@ -223,7 +221,7 @@
                     class="d-flex mx-auto my-5 pa-6"
                     outlined
                     color="primary darken-2"
-                    width="300"
+                    width="280"
                     :loading="loading"
                     @click="complete"
                   >
@@ -275,23 +273,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, SetupContext, toRefs, computed, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, computed } from '@vue/composition-api'
 import MovieList from '@/components/parts/MovieList.vue'
 
 export default defineComponent({
   components: {
     MovieList
   },
-  setup (_, context: SetupContext) {
+  setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      isMobile: false,
       stepper: 1,
       loading: false,
+      isOpenTextBox: false,
+      toggleLabel: computed(() => {
+        if (reactiveState.isOpenTextBox) {
+          return '閉じる'
+        } else {
+          return 'もっと見る'
+        }
+      }),
       paymentType: 'credit',
       cartItem: true,
       totalPrice: '20,000',
-      isOpenTextBox: false,
       defaultSelected: 'credit',
       defaultCreditSelected: 'existing',
       showForm: false,
@@ -335,17 +339,8 @@ export default defineComponent({
           reactiveState.stepper = 2
           reactiveState.loading = false
         }, 3000)
-
-        console.log(reactiveState.paymentType)
       }
     }
-
-    onMounted(() => {
-      const width = window.outerWidth
-      if (width <= 959) {
-        reactiveState.isMobile = true
-      }
-    })
 
     return {
       ...toRefs(reactiveState),
@@ -360,17 +355,7 @@ export default defineComponent({
   padding: 60px 40px !important;
 
   @media (--sm) {
-    padding: 20px 10px 30px !important;
-  }
-}
-
-.cart h2 {
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-
-  @media (--sm) {
-    margin-bottom: 0;
-    padding-bottom: 8px;
+    padding: 20px 12px 100px !important;
   }
 }
 
@@ -379,6 +364,12 @@ export default defineComponent({
 }
 
 /* step1 */
+.cart .v-card__title {
+  @media (--sm) {
+    font-size: 16px;
+  }
+}
+
 .price {
   font-size: 20px;
   font-weight: bold;
@@ -386,18 +377,18 @@ export default defineComponent({
   text-align: right;
 
   @media (--sm) {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 4px !important;
   }
 }
 
 .price.-total {
   font-size: 26px;
-  margin: 20px;
+  margin: 12px 20px;
 
   @media (--sm) {
-    font-size: 18px;
-    margin: 12px 4px;
+    font-size: 16px;
+    margin: 12px;
   }
 }
 
@@ -439,7 +430,7 @@ form {
 
 .expand {
   margin-top: -20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   max-height: 130px;
   overflow: hidden;
   position: relative;
@@ -472,18 +463,16 @@ form {
   display: block;
   font-size: 12px !important;
   margin: auto;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
   right: 0;
   position: absolute;
   text-align: left;
   text-decoration: underline;
   text-transform: uppercase;
-  z-index: 15;
 
   @media (--sm) {
     font-size: 10px !important;
-    bottom: 20px;
   }
 }
 
@@ -493,6 +482,14 @@ input[type=checkbox]:checked ~ .expand {
 
 input[type=checkbox]:checked ~ .expand::before {
   opacity: 0
+}
+
+.payment {
+  margin-top: 60px;
+
+  @media (--sm) {
+    margin-top: 40px;
+  }
 }
 
 .subRadio {
@@ -522,7 +519,7 @@ input[type=checkbox]:checked ~ .expand::before {
 
   @media (--sm) {
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 12px;
     line-height: 1.6;
   }
 }

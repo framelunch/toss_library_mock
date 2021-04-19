@@ -65,7 +65,7 @@ export default defineComponent({
   padding: 32px 40px;
 
   @media (--sm) {
-    padding: 32px 20px;
+    padding: 20px 20px 0 20px;
   }
 }
 
@@ -100,7 +100,7 @@ export default defineComponent({
     flex-basis: 65%;
     font-size: 12px !important;
     line-height: 1.6;
-    padding-left: 10px;
+    padding-left: 12px;
   }
 }
 </style>

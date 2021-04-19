@@ -1,6 +1,6 @@
 <template>
-  <div class="slideMovieList">
-    <swiper :options="swiperOption">
+  <div class="slideMovieList -sp">
+    <swiper :options="swiperOptionSp">
       <swiper-slide
         v-for="(item, i) in items"
         :key="i"
@@ -14,8 +14,6 @@
           </p>
         </div>
       </swiper-slide>
-      <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
-      <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
   </div>
 </template>
@@ -27,15 +25,11 @@ export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      swiperOption: {
+      swiperOptionSp: {
         delay: 1000,
-        slidesPerView: 4.15,
+        slidesPerView: 2.5,
         spaceBetween: 20,
-        loop: false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        }
+        freemode: true
       },
       items: [
         {
@@ -81,51 +75,17 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.slideMovieList .slide__inner {
+.slideMovieList.-sp .slide__inner {
   cursor: pointer;
-  transition: .3s;
 }
 
-.slideMovieList .slide__inner .image img {
+.slideMovieList.-sp .slide__inner .image img {
   width: 100%;
 }
 
-.slideMovieList .slide__inner .title {
-  font-size: 14px !important;
+.slideMovieList.-sp .slide__inner .title {
+  font-size: 12px !important;
   font-weight: bold;
-  line-height: 1.8;
-}
-
-/* Swiper */
-.swiper-button-prev,
-.swiper-button-next {
-  top: 45%;
-}
-
-.swiper-button-prev {
-  left: 10px;
-
-  @media (--sm) {
-    display: none;
-  }
-}
-
-.swiper-button-next {
-  right: 10px;
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  content: '';
-  border-top: 4px solid #fff;
-  border-right: 4px solid #fff;
-  border-radius: 2px;
-  height: 26px;
-  width: 40px;
-  transform: rotate(45deg);
-}
-
-.swiper-slide:last-child .slide__inner {
-  margin-right: 12px;
+  line-height: 1.7;
 }
 </style>

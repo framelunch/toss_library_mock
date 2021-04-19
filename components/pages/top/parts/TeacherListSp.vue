@@ -29,7 +29,8 @@ export default defineComponent({
       swiperOptionSp: {
         delay: 1000,
         slidesPerView: 3.5,
-        spaceBetween: 25
+        spaceBetween: 25,
+        freemode: true
       },
       teachers: [
         { name: '向山 洋一' },

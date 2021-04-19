@@ -1,6 +1,6 @@
 <template>
   <v-footer padless class="d-print-none">
-    <p class="title pl-6 sm-only">TOSSオンライン</p>
+    <p class="title pl-6 mb-3 sm-only">TOSSオンライン</p>
     <div class="links">
       <div class="logoFTR not-sm-only"></div>
       <ul>
@@ -53,7 +53,7 @@ footer {
   display: flex;
   background-color: #28292a !important;
   font-size: 1em;
-  padding: 40px 0;
+  padding: 28px 0;
 
   @media (--sm) {
     background-color: #F7F7F7 !important;
@@ -100,7 +100,7 @@ footer {
 
   @media (--sm) {
     color: #6F6F6F;
-    padding-left: 10px;
+    padding-left: 12px;
   }
 }
 
@@ -138,7 +138,6 @@ ul {
 li {
   color: white;
   font-size: 0.8em;
-  font-weight: 700;
   margin-right: 2em;
   list-style-type: none;
   white-space: nowrap;
@@ -146,7 +145,7 @@ li {
   @media (--sm) {
     color: #6F6F6F;
     margin-right: 0;
-    line-height: 3;
+    line-height: 2.8;
   }
 }
 
@@ -163,6 +162,7 @@ li {
 
   .cpyrt {
     align-items: flex-start;
+    margin-top: 1em;
     margin-left: 1em;
   }
 
@@ -172,6 +172,7 @@ li {
 
   .cpy {
     font-size: 10px;
+    margin-top: 1.5em;
   }
 
   .library {

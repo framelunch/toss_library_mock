@@ -7,7 +7,6 @@
 
       <div class="searchbox">
         <v-text-field
-          outlined
           dense
           hide-details=""
           label=""
@@ -32,13 +31,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      isMobile: false,
       btns: [
         {
           name: 'ホーム',
@@ -57,13 +55,6 @@ export default defineComponent({
           to: '/mypage'
         }
       ]
-    })
-
-    onMounted(() => {
-      const width = window.outerWidth
-      if (width <= 959) {
-        reactiveState.isMobile = true
-      }
     })
 
     return {
@@ -98,22 +89,30 @@ export default defineComponent({
   left: 0;
   right: 0;
   margin: auto;
-  width: 400px;
+  width: 360px;
 
   @media (--sm) {
-    width: 90%;
+    width: 85%;
   }
+}
+
+.navi .searchbox .v-input {
+  margin-top: 0;
 }
 
 .navi .searchbox .v-text-field .v-input__slot {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
   min-height: 32px !important;
-  padding: 0 12px 0 20px !important;
+  padding: 0 12px 0 16px !important;
 }
 
 .navi .searchbox .v-text-field input {
   font-size: 14px;
+
+  @media (--sm) {
+    font-size: 12px;
+  }
 }
 
 .navi .searchbox .v-text-field .v-input__append-inner {

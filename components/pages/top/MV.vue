@@ -34,7 +34,7 @@
   position: relative;
 
   @media (--sm) {
-    height: 400px;
+    height: 300px;
   }
 }
 

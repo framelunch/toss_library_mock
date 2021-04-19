@@ -61,7 +61,7 @@ export default defineComponent({
 
   @media (--sm) {
     padding-top: 0 !important;
-    padding-bottom: 30px !important;
+    padding-bottom: 32px !important;
   }
 }
 
@@ -75,21 +75,16 @@ section.list {
   }
 }
 
-section.list .list__head:not(.sm-only) {
+section.list .list__head {
   align-items: center;
   display: flex;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-section.list .list__head.sm-only {
-  align-items: center;
-  display: flex;
-  margin-bottom: 8px;
-}
-
-section.list .list__head h2 {
+section.list.teacher .list__head,
+section.list.subject .list__head {
   @media (--sm) {
-    font-size: 18px;
+    margin-bottom: 12px;
   }
 }
 
@@ -110,14 +105,10 @@ section.list .list__head small {
   width: 180px;
 
   @media (--sm) {
-    margin-left: 10px;
+    margin-bottom: 24px;
+    margin-left: 0;
     width: 160px;
   }
-}
-
-.selectBox.sm-only {
-  margin-left: 0;
-  margin-bottom: 24px;
 }
 
 .selectBox .v-select__selection {

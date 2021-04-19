@@ -4,7 +4,7 @@
       fluid
       class="pa-0"
     >
-      <div v-if="!isMobile" class="pb-3 search__head">
+      <div class="pb-3 search__head not-sm-only">
         <v-row class="justify-space-between">
           <v-col
             class="d-flex justify-center menu all"
@@ -26,12 +26,12 @@
                 <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
-                      v-for="(item, i) in teachers"
-                      :key="i"
+                      v-for="teacher in teachers"
+                      :key="teacher.id"
                       class="detailItem pa-2"
-                      @click="selectTeacher"
+                      @click="selectTeacher(teacher)"
                     >
-                      {{ item.name }}
+                      {{ teacher.name }}
                     </v-col>
                   </v-row>
                 </v-container>
@@ -52,12 +52,12 @@
                 <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
-                      v-for="(item, i) in subjects"
-                      :key="i"
+                      v-for="subject in subjects"
+                      :key="subject.id"
                       class="detailItem pa-2"
-                      @click="selectSubject"
+                      @click="selectSubject(subject)"
                     >
-                      {{ item.name }}
+                      {{ subject.name }}
                     </v-col>
                   </v-row>
                 </v-container>
@@ -78,12 +78,12 @@
                 <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
-                      v-for="(item, i) in categories"
-                      :key="i"
+                      v-for="category in categories"
+                      :key="category.id"
                       class="detailItem pa-2"
-                      @click="selectCategory"
+                      @click="selectCategory(category)"
                     >
-                      {{ item.name }}
+                      {{ category.name }}
                     </v-col>
                   </v-row>
                 </v-container>
@@ -104,12 +104,12 @@
                 <v-container class="pa-6">
                   <v-row wrap class="flex-column">
                     <v-col
-                      v-for="(item, i) in plans"
-                      :key="i"
+                      v-for="plan in plans"
+                      :key="plan.id"
                       class="detailItem pa-2"
-                      @click="selectPlan"
+                      @click="selectPlan(plan)"
                     >
-                      {{ item.name }}
+                      {{ plan.name }}
                     </v-col>
                   </v-row>
                 </v-container>
@@ -118,15 +118,74 @@
           </v-col>
         </v-row>
       </div>
-      <div v-else class="pb-3 search__head">
+      <div class="pb-8 search__head sm-only">
         <v-expansion-panels accordion>
-          <v-expansion-panel
-            v-for="(item,i) in 5"
-            :key="i"
-          >
-            <v-expansion-panel-header>Item</v-expansion-panel-header>
+          <v-expansion-panel class="teacher">
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+              先生から探す
+            </v-expansion-panel-header>
             <v-expansion-panel-content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              <ul class="detailMenu -teacher pl-0">
+                <li
+                  v-for="teacher in teachers"
+                  :key="teacher.id"
+                  class="py-3 px-6"
+                  @click="selectTeacher(teacher)"
+                >
+                  {{ teacher.name }}
+                </li>
+              </ul>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel class="subject">
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+              教科から探す
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ul class="detailMenu -subject pl-0">
+                <li
+                  v-for="subject in subjects"
+                  :key="subject"
+                  class="py-3 px-6"
+                  @click="selectSubject(subject)"
+                >
+                  {{ subject.name }}
+                </li>
+              </ul>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel class="category">
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+              カテゴリーから探す
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ul class="detailMenu -category pl-0">
+                <li
+                  v-for="category in categories"
+                  :key="category.id"
+                  class="py-3 px-6"
+                  @click="selectCategory(category)"
+                >
+                  {{ category.name }}
+                </li>
+              </ul>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel class="plan">
+            <v-expansion-panel-header expand-icon="mdi-menu-down">
+              プランから探す
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <ul class="detailMenu -plan pl-0">
+                <li
+                  v-for="plan in plans"
+                  :key="plan.id"
+                  class="py-3 px-6"
+                  @click="selectPlan(plan)"
+                >
+                  {{ plan.name }}
+                </li>
+              </ul>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -160,7 +219,6 @@ export default defineComponent({
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
-      isMobile: false,
       query: {},
       hash: '',
       all: true,
@@ -199,40 +257,147 @@ export default defineComponent({
         plan: false
       },
       teachers: [
-        { name: '向山 洋一' },
-        { name: '谷 和樹' },
-        { name: '河田 孝文' },
-        { name: '小嶋 悠紀' },
-        { name: '小野 隆行' },
-        { name: '長谷川 博之' },
-        { name: '石坂 陽' },
-        { name: '向山 行雄' },
-        { name: '特別講師' }
+        {
+          id: 1,
+          name: '向山 洋一',
+          value: 'te01'
+        },
+        {
+          id: 2,
+          name: '谷 和樹',
+          value: 'te02'
+        },
+        {
+          id: 3,
+          name: '河田 孝文',
+          value: 'te03'
+        },
+        {
+          id: 4,
+          name: '小嶋 悠紀',
+          value: 'te04'
+        },
+        {
+          id: 5,
+          name: '小野 隆行',
+          value: 'te05'
+        },
+        {
+          id: 6,
+          name: '長谷川 博之',
+          value: 'te06'
+        },
+        {
+          id: 7,
+          name: '石坂 陽',
+          value: 'te07'
+        },
+        {
+          id: 8,
+          name: '向山 行雄',
+          value: 'te08'
+        },
+        {
+          id: 9,
+          name: '特別講師',
+          value: 'te09'
+        }
       ],
       subjects: [
-        { name: '国語' },
-        { name: '算数' },
-        { name: '社会' },
-        { name: '理科' },
-        { name: '生活' },
-        { name: '音楽' },
-        { name: '図画工作・美術' },
-        { name: '体育' }
+        {
+          id: 1,
+          name: '国語',
+          value: 'lang'
+        },
+        {
+          id: 2,
+          name: '算数',
+          value: 'math'
+        },
+        {
+          id: 3,
+          name: '社会',
+          value: 'society'
+        },
+        {
+          id: 4,
+          name: '理科',
+          value: 'science'
+        },
+        {
+          id: 5,
+          name: '生活',
+          value: 'le'
+        },
+        {
+          id: 6,
+          name: '音楽',
+          value: 'music'
+        },
+        {
+          id: 7,
+          name: '図画工作・美術',
+          value: 'ca'
+        },
+        {
+          id: 8,
+          name: '体育',
+          value: 'pe'
+        }
       ],
       categories: [
-        { name: '特別支援教育' },
-        { name: '学級経営' },
-        { name: '音声のみ' },
-        { name: '学校づくり' },
-        { name: '向井洋一千葉大学講義シリーズ' },
-        { name: 'おしえて！谷先生シリーズ' }
+        {
+          id: 1,
+          name: '特別支援教育',
+          value: 'cat01'
+        },
+        {
+          id: 2,
+          name: '学級経営',
+          value: 'cat02'
+        },
+        {
+          id: 3,
+          name: '音声のみ',
+          value: 'cat03'
+        },
+        {
+          id: 4,
+          name: '学校づくり',
+          value: 'cat04'
+        },
+        {
+          id: 5,
+          name: '向井洋一千葉大学講義シリーズ',
+          value: 'cat05'
+        },
+        {
+          id: 6,
+          name: 'おしえて！谷先生シリーズ',
+          value: 'cat06'
+        }
       ],
       plans: [
-        { name: 'フリー' },
-        { name: 'ライト' },
-        { name: 'ベーシック' },
-        { name: 'プレミアム' },
-        { name: 'パッケージ' }
+        {
+          id: 1,
+          name: 'フリープラン',
+          value: 'free'
+        },
+        {
+          id: 2,
+          name: 'ライトプラン',
+          value: 'lite'
+        },
+        {
+          id: 3,
+          name: 'ベーシックプラン',
+          value: 'basic'
+        },
+        {
+          id: 4,
+          name: 'プレミアムプラン',
+          value: 'premium'
+        }
       ]
     })
 
@@ -282,41 +447,157 @@ export default defineComponent({
         context.root.$router.push('search')
         reactiveState.title = '全て'
       },
-      selectTeacher () {
-        context.root.$router.push({path: 'search', query: { teacher: 'my' } })
-        reactiveState.title = '向山 洋一先生'
+      selectTeacher (teacher: any) {
+        context.root.$router.push({path: 'search', query: { category: `${ teacher.value }` } })
+        reactiveState.title = `${ teacher.name }`
       },
-      selectSubject () {
-        context.root.$router.push({path: 'search', query: { subject: 'lang' } })
-        reactiveState.title = '国語'
+      selectSubject (subject: any) {
+        context.root.$router.push({path: 'search', query: { category: `${ subject.value }` } })
+        reactiveState.title = `${ subject.name }`
       },
-      selectCategory () {
-        context.root.$router.push({path: 'search', query: { category: 'special' } })
-        reactiveState.title = '特別支援教育'
+      selectCategory (category: any) {
+        context.root.$router.push({path: 'search', query: { category: `${ category.value }` } })
+        reactiveState.title = `${ category.name }`
       },
-      selectPlan () {
-        context.root.$router.push({path: 'search', query: { plan: 'free' } })
-        reactiveState.title = 'フリープラン'
+      selectPlan (plan: any) {
+        context.root.$router.push({path: 'search', query: { plan: `${ plan.value }` } })
+        reactiveState.title = `${ plan.name }`
       }
     }
 
     onMounted(() => {
-      const width = window.outerWidth
-      if (width <= 959) {
-        reactiveState.isMobile = true
-      }
-
       const query = context.root.$route.query
       const hash = context.root.$route.hash
       reactiveState.query = query
       reactiveState.hash = hash
 
       if (query) {
-        if (query.teacher) {
-          reactiveState.title = '向山 洋一先生'
+        switch (query.teacher) {
+          case 'te01':
+            reactiveState.title = '向山 洋一先生'
+            break
 
-        } else if (query.subject) {
-          reactiveState.title = '国語'
+          case 'te02':
+            reactiveState.title = '谷 和樹先生'
+            break
+
+          case 'te03':
+            reactiveState.title = '河田 孝文先生'
+            break
+
+          case 'te04':
+            reactiveState.title = '小嶋 悠紀先生'
+            break
+
+          case 'te05':
+            reactiveState.title = '小野 隆行先生'
+            break
+
+          case 'te06':
+            reactiveState.title = '長谷川 博之先生'
+            break
+
+          case 'te07':
+            reactiveState.title = '石坂 陽先生'
+            break
+
+          case 'te08':
+            reactiveState.title = '向山 行雄先生'
+            break
+
+          case 'te09':
+            reactiveState.title = '特別講師'
+            break
+
+          default:
+            break
+        }
+
+        switch (query.subject) {
+          case 'lang':
+            reactiveState.title = '国語'
+            break
+
+          case 'math':
+            reactiveState.title = '算数'
+            break
+
+          case 'society':
+            reactiveState.title = '社会'
+            break
+
+          case 'science':
+            reactiveState.title = '理科'
+            break
+
+          case 'le':
+            reactiveState.title = '生活'
+            break
+
+          case 'music':
+            reactiveState.title = '音楽'
+            break
+
+          case 'ca':
+            reactiveState.title = '図画工作・美術'
+            break
+
+          case 'pe':
+            reactiveState.title = '体育'
+            break
+
+          default:
+            break
+        }
+
+        switch (query.category) {
+          case 'cat01':
+            reactiveState.title = '特別支援教育'
+            break
+
+          case 'cat02':
+            reactiveState.title = '学級経営'
+            break
+
+          case 'cat03':
+            reactiveState.title = '音声のみ'
+            break
+
+          case 'cat04':
+            reactiveState.title = '学校づくり'
+            break
+
+          case 'cat05':
+            reactiveState.title = '向井洋一千葉大学講義シリーズ'
+            break
+
+          case 'cat06':
+            reactiveState.title = 'おしえて！谷先生シリーズ'
+            break
+
+          default:
+            break
+        }
+
+        switch (query.plan) {
+          case 'free':
+            reactiveState.title = 'フリープラン'
+            break
+
+          case 'lite':
+            reactiveState.title = 'ライトプラン'
+            break
+
+          case 'basic':
+            reactiveState.title = 'ベーシックプラン'
+            break
+
+          case 'premium':
+            reactiveState.title = 'プレミアムプラン'
+            break
+
+          default:
+            break
         }
       }
 
@@ -347,17 +628,18 @@ export default defineComponent({
 
   @media (--sm) {
     padding-top: 0 !important;
-    padding-bottom: 30px !important;
+    padding-bottom: 32px !important;
   }
 }
 
 .search h2 {
   @media (--sm) {
-    font-size: 20px;
+    margin-bottom: 0 !important;
   }
 }
 
 .search h2 span {
+  font-size: .8em;
   font-weight: normal;
 }
 
@@ -367,7 +649,7 @@ export default defineComponent({
 
   @media (--sm) {
     margin-bottom: 80px;
-    margin-left: 10px;
+    margin-left: 12px;
   }
 }
 
@@ -375,16 +657,18 @@ export default defineComponent({
   margin-top: 4px;
 
   @media (--sm) {
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 0;
     line-height: 1.6;
   }
 }
 
 .search__head {
-  border-bottom: 2px solid #E9E9E9;
-  margin: 0 auto 40px;
-  max-width: 900px;
+  @media (--not-sm) {
+    border-bottom: 2px solid #E9E9E9;
+    margin: 0 auto 40px;
+    max-width: 900px;
+  }
 }
 
 .search__head .menu {
@@ -401,7 +685,7 @@ export default defineComponent({
 .search__head .icon {
   background-color: #707070;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 12px;
   position: relative;
   height: 20px;
   width: 20px;
@@ -419,7 +703,7 @@ export default defineComponent({
   right: 0;
   position: absolute;
   transform: rotate(45deg);
-  transition: .3s;
+  transition: .15s;
   height: 8px;
   width: 8px;
 }
@@ -429,16 +713,59 @@ export default defineComponent({
 }
 
 .detailMenu {
-  background-color: #fff;
-  border: 1px solid #909090;
-  border-radius: 20px;
+  @media (--not-sm) {
+    background-color: #fff;
+    border: 1px solid #909090;
+    border-radius: 20px;
+    margin: auto;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    max-width: 640px;
+    z-index: 99;
+  }
+
+  @media (--sm) {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+  }
+}
+
+.detailMenu li {
+  border-bottom: 1px solid #C0C0C0;
+  font-size: 13px;
+  flex-basis: 50%;
+  list-style-type: none;
+  position: relative;
+}
+
+.detailMenu li:nth-child(odd) {
+  border-right: 1px solid #C0C0C0;
+}
+
+.detailMenu.-teacher li:last-child,
+.detailMenu.-subject li:nth-child(7),
+.detailMenu.-subject li:last-child,
+.detailMenu.-category li:nth-child(5),
+.detailMenu.-category li:last-child {
+  border-bottom: none;
+}
+
+.detailMenu li::after {
+  content: '';
+  display: block;
+  border-top: 1px solid #707070;
+  border-right: 1px solid #707070;
   margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 16px;
   position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  max-width: 640px;
-  z-index: 99;
+  transform: rotate(45deg);
+  height: 6px;
+  width: 6px;
 }
 
 .detailMenu .container {
@@ -476,5 +803,32 @@ export default defineComponent({
   cursor: pointer;
   flex-basis: 100% !important;
   transition: .15s;
+}
+
+.search .v-expansion-panels .v-expansion-panel:not(:first-child)::after {
+  border-color: #C0C0C0;
+}
+
+.search .v-expansion-panels {
+  border-radius: 0 !important;
+}
+
+.search .v-expansion-panel-content__wrap {
+  padding: 0 !important;
+}
+
+.search .v-expansion-panel .v-expansion-panel-header {
+  font-size: 14px;
+  max-height: 40px;
+  min-height: 40px;
+}
+
+.search .v-expansion-panel:not(.v-expansion-panel--active).plan .v-expansion-panel-header {
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.search .v-expansion-panel--active > .v-expansion-panel-header {
+  background-color: #F5F5F5 !important;
+  min-height: auto;
 }
 </style>

@@ -17,3 +17,9 @@
     display: block;
   }
 }
+
+h2 {
+  @media (--sm) {
+    font-size: 18px;
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <!-- 先生から探す -->
-  <section class="list teachers">
+  <section class="list teacher">
     <div class="list__head not-sm-only">
       <h2>先生から探す</h2>
       <div class="selectBox">
@@ -13,6 +13,7 @@
           dense
           outlined
           class="rounded-0"
+          @change="changeValue"
         />
       </div>
       <small @click="toSearch">一覧を見る</small>
@@ -32,6 +33,7 @@
         dense
         outlined
         class="rounded-0"
+        @change="changeValue"
       />
     </div>
 
@@ -63,13 +65,57 @@ export default defineComponent({
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
-      teachers: [ '向山 洋一', '谷 和樹', '河田 孝文', '小嶋 悠紀', '小野 隆行', '長谷川 博之', '石坂 陽', '向山 行雄', '特別講師' ]
+      teachers: [ '向山 洋一', '谷 和樹', '河田 孝文', '小嶋 悠紀', '小野 隆行', '長谷川 博之', '石坂 陽', '向山 行雄', '特別講師' ],
+      selectedValue: ''
     })
 
     /* Methods */
     const methods = {
+      changeValue (value: any) {
+        // console.log('value', value)
+        switch (value) {
+          case '向山 洋一':
+            reactiveState.selectedValue = 'te01'
+            break
+
+          case '谷 和樹':
+            reactiveState.selectedValue = 'te02'
+            break
+
+          case '河田 孝文':
+            reactiveState.selectedValue = 'te03'
+            break
+
+          case '小嶋 悠紀':
+            reactiveState.selectedValue = 'te04'
+            break
+
+          case '小野 隆行':
+            reactiveState.selectedValue = 'te05'
+            break
+
+          case '長谷川 博之':
+            reactiveState.selectedValue = 'te06'
+            break
+
+          case '石坂 陽':
+            reactiveState.selectedValue = 'te07'
+            break
+
+          case '向山 行雄':
+            reactiveState.selectedValue = 'te08'
+            break
+
+          case '特別講師':
+            reactiveState.selectedValue = 'te09'
+            break
+
+          default:
+            break
+        }
+      },
       toSearch () {
-        context.root.$router.push({path: 'search', query: { teacher: 'my' } })
+        context.root.$router.push({path: 'search', query: { teacher: `${ reactiveState.selectedValue }` } })
       }
     }
 
@@ -82,7 +128,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.list.teachers {
+.list.teacher {
   @media (--sm) {
     padding-right: 0;
   }

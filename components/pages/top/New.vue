@@ -50,7 +50,7 @@ export default defineComponent({
   margin-top: 60px;
 
   @media (--sm) {
-    margin-top: 40px;
+    margin-top: 32px;
   }
 }
 </style>
