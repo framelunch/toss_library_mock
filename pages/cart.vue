@@ -315,15 +315,15 @@ export default defineComponent({
         },
         {
           image: require('@/assets/images/movie02.png'),
-          title: '向山セレクション2 国語算数番宣'
+          title: '⑥河田孝文ゼミナール第７回講義「６時間目」'
         },
         {
           image: require('@/assets/images/movie03.png'),
-          title: '向山洋一セレクション（番宣）'
+          title: '①河田孝文ゼミナール第6回講義「3時間目：理科」'
         },
         {
           image: require('@/assets/images/movie04.png'),
-          title: '伴一孝セレクション'
+          title: '⑦谷和樹教授研修会「Q＆A」'
         }
       ]
     })

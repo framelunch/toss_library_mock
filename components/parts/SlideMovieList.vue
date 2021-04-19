@@ -29,7 +29,7 @@ export default defineComponent({
     const reactiveState = reactive({
       swiperOption: {
         delay: 1000,
-        slidesPerView: 4.15,
+        slidesPerView: 4.5,
         spaceBetween: 24,
         freemode: true,
         navigation: {
@@ -44,15 +44,15 @@ export default defineComponent({
         },
         {
           image: require('@/assets/images/movie02.png'),
-          title: '向山セレクション2 国語算数番宣'
+          title: '⑥河田孝文ゼミナール第７回講義「６時間目」'
         },
         {
           image: require('@/assets/images/movie03.png'),
-          title: '向山洋一セレクション（番宣）'
+          title: '①河田孝文ゼミナール第6回講義「3時間目：理科」'
         },
         {
           image: require('@/assets/images/movie04.png'),
-          title: '伴一孝セレクション'
+          title: '⑦谷和樹教授研修会「Q＆A」'
         },
         {
           image: require('@/assets/images/movie05.png'),
@@ -99,15 +99,15 @@ export default defineComponent({
 /* Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  top: 45%;
+  top: 40%;
 }
 
 .swiper-button-prev {
-  left: 5%;
+  left: 2%;
 }
 
 .swiper-button-next {
-  right: 5%;
+  right: 2%;
 }
 
 .swiper-button-prev:after,
@@ -118,9 +118,5 @@ export default defineComponent({
   height: 28px;
   width: 44px;
   transform: rotate(45deg);
-}
-
-.swiper-slide:last-child .slide__inner {
-  margin-right: 12px;
 }
 </style>
