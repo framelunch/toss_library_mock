@@ -1,5 +1,5 @@
 <template>
-  <v-main class="search px-0">
+  <v-main class="search px-0 mt-15">
     <v-container fluid class="pa-0">
       <div class="pb-3 search__head not-sm-only">
         <v-row class="justify-space-between">

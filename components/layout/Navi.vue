@@ -68,9 +68,8 @@ export default defineComponent({
 <style lang="postcss">
 .navi {
   background-color: #333333;
-  margin-top: 60px;
   position: sticky;
-  top: 60px;
+  top: 59px;
   height: 48px;
   width: 100%;
   z-index: 2;

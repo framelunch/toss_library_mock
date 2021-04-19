@@ -1,5 +1,5 @@
 <template>
-  <v-main class="cart">
+  <v-main class="cart mt-15">
     <h2 class="pb-3 border-bottom">
       カート
     </h2>

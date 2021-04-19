@@ -1,5 +1,5 @@
 <template>
-  <v-main class="mypage">
+  <v-main class="mypage mt-15">
     <v-container fluid class="pa-0">
       <section class="history">
         <div class="list__head">
