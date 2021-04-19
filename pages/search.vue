@@ -197,7 +197,7 @@
           <span>の動画とセミナー</span>
         </h2>
         <p class="number">（全60件）</p>
-        <search-all v-if="isAll" />
+        <search-all v-if="!isNoTab" />
         <search-result v-else ref="searchResultRef" />
       </div>
     </v-container>
@@ -221,7 +221,7 @@ export default defineComponent({
     const reactiveState = reactive({
       query: {},
       hash: '',
-      isAll: false,
+      isNoTab: true,
       title: '全て',
       headMenu: [
         {
@@ -444,7 +444,7 @@ export default defineComponent({
         reactiveState.showDetailMenu.category = false
       },
       selectAll () {
-        reactiveState.isAll = true
+        reactiveState.isNoTab = true
         context.root.$router.push('search')
         reactiveState.title = '全て'
 
@@ -452,18 +452,22 @@ export default defineComponent({
         reactiveState.showDetailMenu.subject = false
         reactiveState.showDetailMenu.category = false
         reactiveState.showDetailMenu.plan = false
+
+        if (searchResultRef.value) {
+          return searchResultRef.value.load()
+        }
       },
       selectTeacher (teacher: any) {
-        reactiveState.isAll = false
+        reactiveState.isNoTab = true
         context.root.$router.push({path: 'search', query: { category: `${ teacher.value }` } })
-        reactiveState.title = `${ teacher.name }`
+        reactiveState.title = `${ teacher.name }先生`
 
         if (searchResultRef.value) {
           return searchResultRef.value.load()
         }
       },
       selectSubject (subject: any) {
-        reactiveState.isAll = false
+        reactiveState.isNoTab = true
         context.root.$router.push({path: 'search', query: { category: `${ subject.value }` } })
         reactiveState.title = `${ subject.name }`
 
@@ -472,7 +476,7 @@ export default defineComponent({
         }
       },
       selectCategory (category: any) {
-        reactiveState.isAll = false
+        reactiveState.isNoTab = true
         context.root.$router.push({path: 'search', query: { category: `${ category.value }` } })
         reactiveState.title = `${ category.name }`
 
@@ -481,7 +485,7 @@ export default defineComponent({
         }
       },
       selectPlan (plan: any) {
-        reactiveState.isAll = false
+        reactiveState.isNoTab = true
         context.root.$router.push({path: 'search', query: { plan: `${ plan.value }` } })
         reactiveState.title = `${ plan.name }`
 
@@ -636,7 +640,7 @@ export default defineComponent({
 
         } else if (hash.includes('history')) {
           reactiveState.title = '再生履歴'
-          reactiveState.isAll = true
+          reactiveState.isNoTab = false
         }
       }
     })

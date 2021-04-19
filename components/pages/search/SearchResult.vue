@@ -66,10 +66,10 @@ export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      isLoading: false,
-      tab: null,
       items: [ 'すべて', '講座', 'セミナー' ],
-      sortItems: [ '新着順', '閲覧が多い順', '閲覧が少ない順' ]
+      sortItems: [ '新着順', '閲覧が多い順', '閲覧が少ない順' ],
+      isLoading: false,
+      tab: null
     })
 
     /* Methods */
