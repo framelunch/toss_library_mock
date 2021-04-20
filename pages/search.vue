@@ -1,5 +1,5 @@
 <template>
-  <v-main class="search px-0 mt-15">
+  <v-main class="search">
     <v-container fluid class="pa-0">
       <div class="pb-3 search__head not-sm-only">
         <v-row class="justify-space-between">
@@ -656,9 +656,11 @@ export default defineComponent({
 
 <style lang="postcss">
 .search {
+  margin-top: 100px;
   padding-bottom: 60px !important;
 
   @media (--sm) {
+    margin-top: 108px;
     padding-top: 0 !important;
     padding-bottom: 32px !important;
   }
@@ -864,10 +866,6 @@ export default defineComponent({
   font-size: 14px;
   max-height: 40px;
   min-height: 40px;
-}
-
-.search .v-expansion-panel:not(.v-expansion-panel--active).plan .v-expansion-panel-header {
-  border-bottom: 1px solid #C0C0C0;
 }
 
 .search .v-expansion-panel--active > .v-expansion-panel-header {

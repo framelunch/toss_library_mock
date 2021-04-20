@@ -9,7 +9,7 @@
         hide-details=""
         dense
         outlined
-        color="#e764aa"
+        color="secondary"
         @change="changeValue"
       />
     </div>

@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <Header />
-    <Navi />
     <nuxt />
     <FootNavi v-if="isMobile" />
     <Footer />
@@ -11,14 +10,12 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import Header from '@/components/layout/Header.vue'
-import Navi from '@/components/layout/Navi.vue'
 import FootNavi from '@/components/layout/FootNavi.vue'
 import Footer from '@/components/layout/Footer.vue'
 
 export default defineComponent({
   components: {
     Header,
-    Navi,
     FootNavi,
     Footer
   },

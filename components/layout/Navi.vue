@@ -1,14 +1,20 @@
 <template>
-  <div wrap class="navi">
+  <div class="navi px-1">
     <div class="navi__inner">
       <div class="plan not-sm-only">
-        <v-chip class="ma-1" small dark color="#e764aa">フリープラン</v-chip>
+        <v-chip
+          small
+          dark
+          color="secondary">
+          フリープラン
+        </v-chip>
       </div>
 
       <div class="searchbox">
         <v-text-field
           dense
-          color="#e764aa"
+          light
+          color="secondary"
           hide-details=""
           label=""
           placeholder="向山洋一, 雪国のくらし, ごんぎつね, etc"
@@ -87,9 +93,10 @@ export default defineComponent({
 
 <style lang="postcss">
 .navi {
-  background-color: #333333;
-  position: sticky;
-  top: 59px;
+  background-color: #333;
+  position: absolute;
+  top: 60px;
+  left: 0;
   height: 48px;
   width: 100%;
   z-index: 2;
@@ -139,7 +146,7 @@ export default defineComponent({
   margin-top: 4px !important;
 }
 
-.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:after {
+.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:before {
   content: none;
 }
 

@@ -72,9 +72,9 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: '#64b5f6',
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          primary: '#43ac8c',
+          accent: '#64b5f6',
+          secondary: '#e764aa',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -107,7 +107,7 @@ export default {
   },
   loadingIndicator: {
     name: 'fading-circle',
-    color: '#e764aa',
+    color: '#43AC8C',
     background: 'white'
   }
 }

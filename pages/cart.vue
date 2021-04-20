@@ -1,5 +1,5 @@
 <template>
-  <v-main class="cart mt-15">
+  <v-main class="cart">
     <h2 class="pb-3 border-bottom">
       カート
     </h2>
@@ -354,9 +354,11 @@ export default defineComponent({
 
 <style lang="postcss">
 .cart {
+  margin-top: 100px;
   padding: 60px 40px !important;
 
   @media (--sm) {
+    margin-top: 108px;
     padding: 20px 12px 100px !important;
   }
 }
@@ -459,8 +461,6 @@ form {
 }
 
 .toggleBox label {
-  background-color: var(--color-primary);
-  border-radius: 50%;
   cursor: pointer;
   display: block;
   font-size: 12px !important;

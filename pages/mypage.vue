@@ -1,5 +1,5 @@
 <template>
-  <v-main class="mypage mt-15">
+  <v-main class="mypage">
     <v-container fluid class="pa-0">
       <section class="history">
         <div class="list__head">
@@ -101,9 +101,11 @@ export default defineComponent({
 
 <style lang="postcss">
 .mypage {
+  margin-top: 100px;
   padding: 60px 0 !important;
 
   @media (--sm) {
+    margin-top: 108px;
     padding: 20px 0 100px 0 !important;
   }
 }
