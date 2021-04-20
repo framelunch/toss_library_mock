@@ -1,17 +1,18 @@
 <template>
-  <div class="footNavi pa-2">
-    <div class="footNavi__inner">
+  <div class="footNavi pa-2 d-flex align-center">
+    <v-container fluid class="footNavi__inner">
       <v-row>
         <v-col
           v-for="(menu, i) in menus"
           :key="i"
+          class="pa-0"
         >
           <nuxt-link
             :to="menu.to"
             class="d-flex flex-column justify-center"
           >
             <v-icon
-              large
+              medium
               color="white"
               class="mb-1"
             >
@@ -21,7 +22,7 @@
           </nuxt-link>
         </v-col>
       </v-row>
-    </div>
+    </v-container>
   </div>
 </template>
 
@@ -68,6 +69,7 @@ export default defineComponent({
   background-color: #1A1A1A;
   color: #fff;
   font-size: 10px;
+  max-height: 52px;
   position: fixed;
   bottom: 0;
   text-align: center;
