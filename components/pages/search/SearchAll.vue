@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import SearchList from '@/components/pages/search/parts/SearchList.vue'
-import Loading from '@/components/pages/search/parts/Loading.vue'
+import Loading from '@/components/parts/Loading.vue'
 
 export default defineComponent({
   components: {

@@ -18,7 +18,8 @@
       v-model="tab"
       background-color="transparent"
       grow
-      color="#707070"
+      hide-slider
+      color="#909090"
       class="tabs"
     >
       <v-tab
@@ -56,7 +57,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import SearchList from '@/components/pages/search/parts/SearchList.vue'
-import Loading from '@/components/pages/search/parts/Loading.vue'
+import Loading from '@/components/parts/Loading.vue'
 
 export default defineComponent({
   components: {
@@ -145,7 +146,10 @@ export default defineComponent({
 
 .tabs {
   max-width: 300px !important;
+  margin-bottom: -1px;
   margin-left: 40px;
+  position: relative;
+  z-index: 1;
 
   @media (--sm) {
     max-width: 100% !important;
@@ -157,11 +161,13 @@ export default defineComponent({
   border-top: 1px solid #909090;
   border-left: 1px solid #909090;
   border-right: 1px solid #909090;
+  border-bottom: 2px solid #909090;
   position: relative;
 }
 
 .tabs .v-tab {
-  color: #707070;
+  box-sizing: border-box;
+  color: #333 !important;
 }
 
 .tabItems {

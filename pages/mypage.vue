@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, SetupContext, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 import SlideMovieListSp from '@/components/parts/SlideMovieListSp.vue'
 import MovieList from '@/components/parts/MovieList.vue'
