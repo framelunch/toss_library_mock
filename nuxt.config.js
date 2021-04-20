@@ -104,5 +104,10 @@ export default {
         }
       }
     }
+  },
+  loadingIndicator: {
+    name: 'fading-circle',
+    color: '#e764aa',
+    background: 'white'
   }
 }
