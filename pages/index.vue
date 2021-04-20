@@ -87,13 +87,6 @@ section.list.teacher .list__head {
   }
 }
 
-section.list.teacher .list__head,
-section.list.subject .list__head {
-  @media (--sm) {
-    margin-bottom: 12px;
-  }
-}
-
 section.list .list__head small {
   color: #64b5f6;
   cursor: pointer;

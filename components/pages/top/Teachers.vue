@@ -1,9 +1,9 @@
 <template>
   <!-- 先生から探す -->
   <section class="list teacher">
-    <div class="list__head not-sm-only">
+    <div class="list__head">
       <h2>先生から探す</h2>
-      <div class="selectBox">
+      <div class="selectBox not-sm-only">
         <v-select
           :items="teachers"
           :value="teachers[0]"
@@ -17,24 +17,6 @@
         />
       </div>
       <small @click="toSearch">一覧を見る</small>
-    </div>
-
-    <div class="list__head sm-only">
-      <h2>先生から探す</h2>
-      <small @click="toSearch">一覧を見る</small>
-    </div>
-    <div class="selectBox sm-only">
-      <v-select
-        :items="teachers"
-        :value="teachers[0]"
-        label=""
-        placeholder=""
-        hide-details=""
-        dense
-        outlined
-        class="rounded-0"
-        @change="changeValue"
-      />
     </div>
 
     <div v-if="!isMobile" class="list__body">
