@@ -194,9 +194,9 @@
       >
         <h2>
           {{ title }}
-          <span>の動画とセミナー</span>
+          <span v-if="hash !== '#history'">の動画とセミナー</span>
         </h2>
-        <p class="number">（全60件）</p>
+        <p v-if="hash !== '#history'" class="number">（全60件）</p>
         <search-all v-if="!isNoTab" />
         <search-result v-else ref="searchResultRef" />
       </div>
