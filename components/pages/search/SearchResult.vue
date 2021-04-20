@@ -1,17 +1,26 @@
 <template>
   <div class="searchResult">
-    <div class="selectBox -sort">
-      <v-select
-        :items="sortItems"
-        :value="sortItems[0]"
-        label=""
-        placeholder=""
-        hide-details=""
-        dense
-        outlined
-        color="secondary"
-        @change="changeValue"
-      />
+    <div class="sorts">
+      <p class="sorts__title mb-1">並び順</p>
+      <div class="d-flex flex-row align-center">
+        <v-btn
+          v-for="item in sortItems"
+          :key="item.id"
+          small
+          text
+          class="btn"
+          :class="[
+            { '-default': item.default },
+            { '-selected': item.default || (item.id === 1 && isChangeOrder.new) || (item.id === 2 && isChangeOrder.show) }
+          ]"
+          width="88"
+          @click="onClicksort(item.id)"
+        >
+          {{ item.name }}
+          <v-icon v-if="!arrowUpIcon">mdi-arrow-down</v-icon>
+          <v-icon v-else>mdi-arrow-up</v-icon>
+        </v-btn>
+      </div>
     </div>
 
     <v-tabs
@@ -55,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, computed, toRefs, onMounted } from '@vue/composition-api'
 import SearchList from '@/components/pages/search/parts/SearchList.vue'
 import Loading from '@/components/parts/Loading.vue'
 
@@ -68,9 +77,25 @@ export default defineComponent({
     /* Reactive State */
     const reactiveState = reactive({
       items: [ 'すべて', '講座', 'セミナー' ],
-      sortItems: [ '新着順', '閲覧が多い順', '閲覧が少ない順' ],
+      sortItems: [
+        {
+          id: 1,
+          name:'新着',
+          default: true
+        },
+        {
+          id: 2,
+          name:'閲覧数',
+          default: false
+        }
+      ],
       isLoading: false,
-      tab: null
+      tab: null,
+      isChangeOrder: {
+        new: false,
+        show: false
+      },
+      arrowUpIcon: false
     })
 
     /* Methods */
@@ -83,6 +108,18 @@ export default defineComponent({
       },
       changeValue (value: any) {
         console.log('value', value)
+        methods.load()
+      },
+      onClicksort (id: number) {
+        if (id === 1) {
+          reactiveState.isChangeOrder.new = true
+          reactiveState.isChangeOrder.show = false
+        } else if (id === 2) {
+          reactiveState.isChangeOrder.show = true
+          reactiveState.isChangeOrder.new = false
+          reactiveState.sortItems[0].default = false
+        }
+        reactiveState.arrowUpIcon = !reactiveState.arrowUpIcon
         methods.load()
       }
     }
@@ -104,44 +141,47 @@ export default defineComponent({
   position: relative;
 }
 
-.selectBox.-sort {
+.sorts {
   margin-left: auto;
   margin-right: 40px;
-  width: 180px;
+  max-width: 204px;
 
   @media (--not-sm) {
     margin-bottom: -36px;
   }
 
   @media (--sm) {
-    margin-left: 12px;
-    margin-right: auto;
+    margin: 16px 0 16px 16px;
     width: 160px;
   }
 }
 
-.selectBox.-sort .v-select__selection {
-  font-size: .9em;
-
-  @media (--sm) {
-    font-size: .8em;
-  }
-}
-
-.selectBox.-sort input {
+.sorts .btn {
+  border-radius: 4px;
   color: #707070;
 }
 
-.selectBox.-sort input::placeholder {
-  color: #909090 !important;
+.sorts .btn:not(:last-child) {
+  margin-right: 20px;
 }
 
-.v-list-item--link:before {
-  background-color: #e764aa !important;
+.sorts .btn.-default,
+.sorts .btn.-selected {
+  border: 1px solid #e764aa;
+  color: #e764aa;
 }
 
-.v-list-item__title {
-  color: #333 !important;
+.sorts .btn:not(.-default, .-selected) .v-icon {
+  display: none;
+}
+
+.sorts .btn:before {
+  background-color: #e764aa;
+}
+
+.sorts__title {
+  font-size: 14px;
+  letter-spacing: .05em;
 }
 
 .tabs {
