@@ -5,17 +5,17 @@
       <h2>新着動画</h2>
       <small @click="toSearch">一覧を見る</small>
     </div>
-    <div v-if="!isMobile" class="list__body">
+    <v-container v-if="!isMobile" fluid class="pa-0 list__body">
       <slide-movie-list />
-    </div>
-    <div v-else class="list__body">
+    </v-container>
+    <v-container v-else fluid class="list__body">
       <movie-list />
-    </div>
+    </v-container>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, SetupContext } from '@vue/composition-api'
+import { defineComponent, SetupContext, reactive, toRefs } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 import MovieList from '@/components/parts/MovieList.vue'
 
@@ -31,14 +31,32 @@ export default defineComponent({
     }
   },
   setup (_, context: SetupContext) {
+    /* Reactive State */
+    const reactiveState = reactive({
+    })
+
     /* Methods */
     const methods = {
       toSearch () {
-        context.root.$router.push({path: 'search', hash: 'new' })
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push({path: 'search', hash: 'new' })
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
       }
     }
 
     return {
+      ...toRefs(reactiveState),
       ...methods
     }
   }
@@ -52,5 +70,9 @@ export default defineComponent({
   @media (--sm) {
     margin-top: 32px;
   }
+}
+
+.list__body.-hidden {
+  opacity: 0;
 }
 </style>

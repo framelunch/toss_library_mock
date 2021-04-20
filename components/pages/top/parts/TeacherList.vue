@@ -1,5 +1,5 @@
 <template>
-  <div class="teacherList">
+  <div class="teacherList slider">
     <swiper :options="swiperOption">
       <swiper-slide
         v-for="teacher in teachers"
@@ -20,9 +20,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, SetupContext, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, SetupContext, toRefs } from '@vue/composition-api'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
 export default defineComponent({
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({

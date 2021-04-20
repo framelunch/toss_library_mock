@@ -23,3 +23,11 @@ h2 {
     font-size: 18px;
   }
 }
+
+.slider {
+  transition: .1s;
+}
+
+.slider.-hidden {
+  opacity: 0;
+}

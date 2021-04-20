@@ -1,5 +1,5 @@
 <template>
-  <div class="slideMovieList">
+  <div class="slideMovieList slider">
     <swiper :options="swiperOption">
       <swiper-slide
         v-for="(item, i) in items"
@@ -22,13 +22,22 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+
 
 export default defineComponent({
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
       swiperOption: {
-        delay: 1000,
+        speed: 300,
         slidesPerView: 4.5,
         spaceBetween: 24,
         freemode: true,
@@ -84,6 +93,7 @@ export default defineComponent({
 .slideMovieList .slide__inner {
   cursor: pointer;
   transition: .3s;
+  width: 100%;
 }
 
 .slideMovieList .slide__inner .image img {
@@ -97,6 +107,10 @@ export default defineComponent({
 }
 
 /* Swiper */
+.swiper-slide {
+  width: 100%;
+}
+
 .swiper-button-prev,
 .swiper-button-next {
   top: 40%;

@@ -109,7 +109,20 @@ export default defineComponent({
         }
       },
       toSearch () {
-        context.root.$router.push({path: 'search', query: { subject: `${ reactiveState.selectedValue }` } })
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push({path: 'search', query: { subject: `${ reactiveState.selectedValue }` } })
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
       }
     }
 

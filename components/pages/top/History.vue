@@ -34,7 +34,20 @@ export default defineComponent({
     /* Methods */
     const methods = {
       toSearch () {
-        context.root.$router.push({path: 'search', hash: 'history' })
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push({path: 'search', hash: 'history' })
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
       }
     }
 

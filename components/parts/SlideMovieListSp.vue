@@ -1,5 +1,5 @@
 <template>
-  <div class="slideMovieList -sp">
+  <div class="slideMovieList -sp slider">
     <swiper :options="swiperOptionSp">
       <swiper-slide
         v-for="(item, i) in items"
@@ -20,8 +20,16 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
 export default defineComponent({
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({

@@ -21,8 +21,7 @@
           v-for="(btn, i) in btns"
           :key="i"
           text
-          :to="btn.to"
-          nuxt
+          @click="pushPage(btn.to)"
         >
           {{ btn.name }}
         </v-btn>
@@ -32,10 +31,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, reactive, SetupContext, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
-  setup (_) {
+  setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
       btns: [
@@ -58,8 +57,29 @@ export default defineComponent({
       ]
     })
 
+    /* Methods */
+    const methods = {
+      pushPage (link: string) {
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push(link)
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
+      }
+    }
+
     return {
-      ...toRefs(reactiveState)
+      ...toRefs(reactiveState),
+      ...methods
     }
   }
 })
