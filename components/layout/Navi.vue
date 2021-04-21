@@ -146,7 +146,8 @@ export default defineComponent({
   margin-top: 4px !important;
 }
 
-.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:before {
+.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:before,
+.navi .searchbox .v-text-field > .v-input__control > .v-input__slot:after {
   content: none;
 }
 
