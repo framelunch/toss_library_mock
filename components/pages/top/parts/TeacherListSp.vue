@@ -10,7 +10,7 @@
           @click="toSearch(teacher)"
         >
           <figure class="image"></figure>
-          <p class="name">
+          <p class="name mb-0">
             {{ teacher.name }}
           </p>
         </div>
@@ -36,8 +36,8 @@ export default defineComponent({
     const reactiveState = reactive({
       swiperOptionSp: {
         delay: 1000,
-        slidesPerView: 3.5,
-        spaceBetween: 25,
+        slidesPerView: 2.5,
+        spaceBetween: 8,
         freemode: true
       },
       teachers: [
@@ -114,13 +114,13 @@ export default defineComponent({
   background-color: #E9E9E9;
   border-radius: 50%;
   margin: auto;
-  height: 80px;
-  width: 80px;
+  height: 108px;
+  width: 108px;
 }
 
 .teacherList.-sp .slide__inner .name {
-  font-size: 12px;
-  margin-top: 10px;
+  font-size: 14px;
+  margin-top: 12px;
   text-align: center;
 }
 </style>

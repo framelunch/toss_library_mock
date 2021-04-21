@@ -1,6 +1,9 @@
 <template>
   <!-- 教科から探す -->
-  <section class="list subject">
+  <section
+    class="list subject"
+    :class="{ '-type01':spLayout.type01 }"
+  >
     <div class="list__head">
       <h2>教科から探す</h2>
       <div class="selectBox not-sm-only">
@@ -18,23 +21,29 @@
       </div>
       <small @click="toSearch">一覧を見る</small>
     </div>
-    <v-container v-if="!isMobile" fluid class="pa-0 list__body">
+
+    <v-container v-if="!isMobile" fluid class="list__body pa-0">
       <slide-movie-list />
     </v-container>
-    <v-container v-else fluid class="list__body">
-      <movie-list />
+    <v-container v-if="isMobile && spLayout.type01" fluid class="list__body pa-0">
+      <slide-movie-list-sp />
+    </v-container>
+    <v-container v-if="isMobile && (spLayout.type02 || spLayout.type03)" fluid class="list__body pa-0">
+      <movie-list :class="{ '-type02':spLayout.type02 }" />
     </v-container>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, SetupContext } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, SetupContext, onMounted } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
+import SlideMovieListSp from '@/components/parts/SlideMovieListSp.vue'
 import MovieList from '@/components/parts/MovieList.vue'
 
 export default defineComponent({
   components: {
     SlideMovieList,
+    SlideMovieListSp,
     MovieList
   },
   props: {
@@ -48,6 +57,11 @@ export default defineComponent({
     const reactiveState = reactive({
       subjects: [ '国語', '算数', '社会', '理科', '生活', '音楽', '図画工作・美術', '体育' ],
       selectedValue: 'lang',
+      spLayout: {
+        type01: false,
+        type02: false,
+        type03: false
+      }
     })
 
     /* Methods */
@@ -107,6 +121,17 @@ export default defineComponent({
         }, 1000)
       }
     }
+
+    onMounted(() => {
+      const route_name = context.root.$route.name
+      if (route_name === 'index') {
+        reactiveState.spLayout.type01 = true
+      } else if (route_name === 'home2') {
+        reactiveState.spLayout.type02 = true
+      } else if (route_name === 'home3') {
+        reactiveState.spLayout.type03 = true
+      }
+    })
 
     return {
       ...toRefs(reactiveState),

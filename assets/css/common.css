@@ -74,9 +74,13 @@ h2 {
   transition: .3s;
 
   @media (--sm) {
-    display: flex;
     flex-basis: 100%;
-    padding: 8px !important;
+  }
+}
+
+.movieList:not(.-type02) .item {
+  @media (--sm) {
+    display: flex;
   }
 }
 
@@ -100,6 +104,11 @@ h2 {
     font-size: 12px !important;
     line-height: 1.6;
     padding-top: 4px;
+  }
+}
+
+.movieList:not(.-type02) .item .title {
+  @media (--sm) {
     padding-left: 12px;
   }
 }
