@@ -18,16 +18,88 @@
   }
 }
 
+/* タイトル */
 h2 {
   @media (--sm) {
     font-size: 18px;
   }
 }
 
+/* swiper ページ遷移前に一瞬切れてしまうのでCSSで制御(これ以外に良い方法見つかっていないので検討) */
 .slider {
   transition: .1s;
 }
 
 .slider.-hidden {
   opacity: 0;
+}
+
+/* 動画リスト(非スライド) */
+.list {
+  margin-top: 40px;
+  padding-left: 40px;
+  width: 100%;
+
+  @media (--sm) {
+    padding: 0 20px;
+  }
+}
+
+.list__head {
+  align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.list.teacher .list__head {
+  @media (--not-sm) {
+    margin-bottom: 28px;
+  }
+}
+
+.list__head small {
+  color: #64b5f6;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 20px;
+  transition: .15s;
+
+  @media (--sm) {
+    font-size: 12px;
+  }
+}
+
+.movieList .item {
+  cursor: pointer;
+  transition: .3s;
+
+  @media (--sm) {
+    display: flex;
+    flex-basis: 100%;
+    padding: 8px !important;
+  }
+}
+
+.movieList .item .image {
+  @media (--sm) {
+    flex-basis: 45%;
+  }
+}
+
+.movieList .item .image img {
+  width: 100%;
+}
+
+.movieList .item .title {
+  font-size: 14px !important;
+  font-weight: bold;
+  line-height: 1.8;
+
+  @media (--sm) {
+    flex-basis: 65%;
+    font-size: 12px !important;
+    line-height: 1.6;
+    padding-top: 4px;
+    padding-left: 12px;
+  }
 }

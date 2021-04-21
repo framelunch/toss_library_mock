@@ -65,40 +65,6 @@ export default defineComponent({
   }
 }
 
-section.list {
-  margin-top: 40px;
-  padding-left: 40px;
-  width: 100%;
-
-  @media (--sm) {
-    padding: 0 20px;
-  }
-}
-
-section.list .list__head {
-  align-items: center;
-  display: flex;
-  margin-bottom: 20px;
-}
-
-section.list.teacher .list__head {
-  @media (--not-sm) {
-    margin-bottom: 28px;
-  }
-}
-
-section.list .list__head small {
-  color: #64b5f6;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 20px;
-  transition: .15s;
-
-  @media (--sm) {
-    font-size: 12px;
-  }
-}
-
 .selectBox {
   margin-left: 20px;
   width: 180px;

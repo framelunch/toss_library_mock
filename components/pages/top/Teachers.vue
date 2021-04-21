@@ -19,12 +19,12 @@
       <small @click="toSearch">一覧を見る</small>
     </div>
 
-    <div v-if="!isMobile" class="list__body">
+    <v-container v-if="!isMobile" fluid class="pa-0 list__body">
       <teacher-list />
-    </div>
-    <div v-else class="list__body">
+    </v-container>
+    <v-container v-else fluid class="list__body">
       <teacher-list-sp />
-    </div>
+    </v-container>
   </section>
 </template>
 

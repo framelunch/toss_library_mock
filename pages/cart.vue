@@ -9,6 +9,7 @@
       class="elevation-0"
     >
       <v-stepper-items class="elevation-0">
+        <!-- step1 -->
         <v-stepper-content step="1" class="pa-0">
           <transition-group name="fade" appear>
             <v-container
@@ -106,11 +107,8 @@
 
               <hr class="mt-10" color="#f0f0f0" />
 
-              <p
-                v-if="cartItem"
-                class="price -total"
-              >
-                合計：¥{{ totalPrice }}
+              <p v-if="cartItem" class="price -total">
+                合計：¥20,000
               </p>
 
               <section class="payment">
@@ -242,6 +240,7 @@
           </transition-group>
         </v-stepper-content>
 
+        <!-- step2 -->
         <v-stepper-content step="2" class="pa-0">
           <v-container
             fluid
@@ -285,29 +284,6 @@ export default defineComponent({
   setup (_) {
     /* Reactive State */
     const reactiveState = reactive({
-      stepper: 1,
-      loading: false,
-      isOpenTextBox: false,
-      toggleLabel: computed(() => {
-        if (reactiveState.isOpenTextBox) {
-          return '閉じる'
-        } else {
-          return 'もっと見る'
-        }
-      }),
-      paymentType: 'credit',
-      cartItem: true,
-      totalPrice: '20,000',
-      defaultSelected: 'credit',
-      defaultCreditSelected: 'existing',
-      showForm: false,
-      complete_text: computed(() => {
-        if (reactiveState.paymentType === 'credit') {
-          return '引き続きTOSS動画ライブラリーをお楽しみください。'
-        } else if (reactiveState.paymentType === 'bank') {
-          return 'ご登録いただいているメールアドレスに振り込み口座情報をお送りいたしました。\nご入金確認後に動画をご視聴いただけます。'
-        }
-      }),
       items: [
         {
           image: require('@/assets/images/movie01.png'),
@@ -325,7 +301,29 @@ export default defineComponent({
           image: require('@/assets/images/movie04.png'),
           title: '⑦谷和樹教授研修会「Q＆A」'
         }
-      ]
+      ],
+      stepper: 1,
+      loading: false,
+      isOpenTextBox: false,
+      toggleLabel: computed(() => {
+        if (reactiveState.isOpenTextBox) {
+          return '閉じる'
+        } else {
+          return 'もっと見る'
+        }
+      }),
+      paymentType: 'credit',
+      cartItem: true,
+      defaultSelected: 'credit',
+      defaultCreditSelected: 'existing',
+      showForm: false,
+      complete_text: computed(() => {
+        if (reactiveState.paymentType === 'credit') {
+          return '引き続きTOSS動画ライブラリーをお楽しみください。'
+        } else if (reactiveState.paymentType === 'bank') {
+          return 'ご登録いただいているメールアドレスに振り込み口座情報をお送りいたしました。\nご入金確認後に動画をご視聴いただけます。'
+        }
+      })
     })
 
     /* Methods */
@@ -359,7 +357,7 @@ export default defineComponent({
 
   @media (--sm) {
     margin-top: 108px;
-    padding: 20px 12px 100px !important;
+    padding: 20px 12px 32px !important;
   }
 }
 
@@ -487,8 +485,7 @@ input[type=checkbox]:checked ~ .expand::before {
 }
 
 .payment {
-  margin-top: 60px;
-  margin-left: auto;
+  margin: 60px auto 0;
   width: 95%;
 
   @media (--sm) {
