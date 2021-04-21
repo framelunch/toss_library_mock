@@ -4,6 +4,7 @@
       <section class="history">
         <div class="list__head">
           <h2>再生履歴</h2>
+          <small @click="toSearch">一覧を見る</small>
         </div>
         <!-- <p class="nothing_text my-5 ml-3">再生履歴はありません。</p> -->
         <v-container v-if="!isMobile" fluid class="list__body pa-0">
@@ -19,10 +20,10 @@
       <section class="favorite not-sm-only">
         <div class="list__head">
           <h2>お気に入り</h2>
-          <small>（全8件）</small>
+          <!-- <small>（全8件）</small> -->
         </div>
         <v-container fluid class="list__body pa-0">
-          <movie-list />
+          <expantion-movie-list />
         </v-container>
       </section>
 
@@ -31,10 +32,10 @@
       <section class="buy not-sm-only">
         <div class="list__head">
           <h2>購入動画</h2>
-          <small>（全8件）</small>
+          <!-- <small>（全8件）</small> -->
         </div>
         <v-container fluid class="list__body pa-0">
-          <movie-list />
+          <expantion-movie-list />
         </v-container>
       </section>
 
@@ -46,7 +47,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-container fluid class="list__body pa-0">
-                <movie-list />
+                <expantion-movie-list />
               </v-container>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -57,7 +58,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-container fluid class="list__body pa-0">
-                <movie-list />
+                <expantion-movie-list />
               </v-container>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -68,22 +69,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, SetupContext, onMounted } from '@vue/composition-api'
 import SlideMovieList from '@/components/parts/SlideMovieList.vue'
 import SlideMovieListSp from '@/components/parts/SlideMovieListSp.vue'
-import MovieList from '@/components/parts/MovieList.vue'
+import ExpantionMovieList from '~/components/parts/ExpantionMovieList.vue'
 
 export default defineComponent({
   components: {
     SlideMovieList,
     SlideMovieListSp,
-    MovieList
+    ExpantionMovieList
   },
-  setup (_) {
+  setup (_, context:SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
       isMobile: false
     })
+
+    /* Methods */
+    const methods = {
+      toSearch () {
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push({path: 'search', hash: 'history' })
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
+      }
+    }
 
     onMounted(() => {
       const width = window.outerWidth
@@ -93,7 +114,8 @@ export default defineComponent({
     })
 
     return {
-      ...toRefs(reactiveState)
+      ...toRefs(reactiveState),
+      ...methods
     }
   }
 })
@@ -106,7 +128,7 @@ export default defineComponent({
 
   @media (--sm) {
     margin-top: 108px;
-    padding: 20px 0 100px 0 !important;
+    padding: 20px 0 32px 0 !important;
   }
 }
 
