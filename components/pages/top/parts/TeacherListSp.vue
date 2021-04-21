@@ -92,7 +92,20 @@ export default defineComponent({
     /* Methods */
     const methods = {
       toSearch (teacher: any) {
-        context.root.$router.push({path: 'search', query: { teacher: `${ teacher.value }` } })
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push({path: 'search', query: { teacher: `${ teacher.value }` } })
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
       }
     }
 
