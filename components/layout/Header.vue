@@ -8,14 +8,13 @@
     height="60"
   >
     <div class="logo">
-      <nuxt-link
+      <span
         class="anc-target"
-        style="text-decoration: none; color: inherit;"
-        to="/"
+        @click="toTop"
       >
         <img src="~/assets/images/tosslibrary_logo_pc.png" alt="TOSS" class="not-sm-only">
         <img src="~/assets/images/tosslibrary_logo_sp.png" alt="TOSS" class="sm-only">
-      </nuxt-link>
+      </span>
     </div>
     <v-spacer />
     <template>
@@ -56,20 +55,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, toRefs, SetupContext, onMounted } from '@vue/composition-api'
 import Navi from '@/components/layout/Navi.vue'
 
 export default defineComponent({
   components: {
     Navi
   },
-  setup (_) {
+  setup (_, context: SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
     })
 
     /* Methods */
     const methods = {
+      toTop () {
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push('/')
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
+      }
     }
 
     onMounted(() => {
@@ -119,5 +134,9 @@ header .logo img {
   @media (--sm) {
     width: 80px;
   }
+}
+
+.anc-target {
+  cursor: pointer;
 }
 </style>
