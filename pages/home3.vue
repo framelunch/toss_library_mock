@@ -79,21 +79,4 @@ export default defineComponent({
     width: 95%;
   }
 }
-
-.selectBox {
-  margin-left: 20px;
-  width: 180px;
-
-  @media (--sm) {
-    margin-bottom: 24px;
-    margin-left: 0;
-    width: 160px;
-  }
-}
-
-.selectBox .v-select__selection {
-  @media (--sm) {
-    font-size: 12px;
-  }
-}
 </style>

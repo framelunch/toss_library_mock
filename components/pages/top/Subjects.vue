@@ -6,7 +6,7 @@
   >
     <div class="list__head">
       <h2>教科から探す</h2>
-      <div class="selectBox not-sm-only">
+      <div class="selectBox">
         <v-select
           :items="subjects"
           :value="subjects[0]"
@@ -15,6 +15,7 @@
           hide-details=""
           dense
           outlined
+          color="#707070"
           class="rounded-0"
           @change="changeValue"
         />
@@ -140,3 +141,41 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="postcss">
+.list.subject .selectBox {
+  margin-left: 20px;
+  width: 180px;
+
+  @media (--sm) {
+    width: 104px;
+  }
+}
+
+.list.subject .selectBox .v-input__slot {
+  @media (--sm) {
+    min-height: 32px !important;
+    max-height: 32px;
+  }
+}
+
+.list.subject .selectBox .v-input__append-inner {
+  @media (--sm) {
+    margin-top: 4px !important;
+  }
+}
+
+.list.subject .selectBox .v-select__selection {
+  @media (--sm) {
+    font-size: 11px;
+  }
+}
+
+.v-list-item__title {
+  color: #333 !important;
+}
+
+.v-list-item--link:before {
+  background-color: #707070 !important;
+}
+</style>

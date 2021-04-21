@@ -1,7 +1,7 @@
 <template>
   <v-main class="search">
     <v-container fluid class="pa-0">
-      <div class="pb-3 search__head not-sm-only">
+      <div class="mb-15 search__head not-sm-only">
         <v-row class="justify-space-between">
           <v-col
             class="d-flex justify-center menu all"
@@ -115,7 +115,7 @@
           </v-col>
         </v-row>
       </div>
-      <div class="pb-8 search__head sm-only">
+      <div class="mb-8 search__head sm-only">
         <v-expansion-panels accordion>
           <v-expansion-panel class="teacher">
             <v-expansion-panel-header expand-icon="mdi-menu-down">
@@ -656,11 +656,10 @@ export default defineComponent({
 
 <style lang="postcss">
 .search {
-  margin-top: 100px;
+  margin-top: 108px;
   padding-bottom: 60px !important;
 
   @media (--sm) {
-    margin-top: 108px;
     padding-top: 0 !important;
     padding-bottom: 32px !important;
   }
@@ -851,7 +850,7 @@ export default defineComponent({
 }
 
 .search .v-expansion-panels .v-expansion-panel:not(:first-child)::after {
-  border-color: #C0C0C0;
+  border-color: #c0c0c0;
 }
 
 .search .v-expansion-panels {
@@ -866,6 +865,10 @@ export default defineComponent({
   font-size: 14px;
   max-height: 40px;
   min-height: 40px;
+}
+
+.search .v-expansion-panel.plan:not(.v-expansion-panel--active) > .v-expansion-panel-header {
+  border-bottom: 1px solid #c0c0c0;
 }
 
 .search .v-expansion-panel--active > .v-expansion-panel-header {

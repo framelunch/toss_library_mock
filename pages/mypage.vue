@@ -123,11 +123,10 @@ export default defineComponent({
 
 <style lang="postcss">
 .mypage {
-  margin-top: 100px;
+  margin-top: 108px;
   padding: 60px 0 !important;
 
   @media (--sm) {
-    margin-top: 108px;
     padding: 20px 0 32px 0 !important;
   }
 }

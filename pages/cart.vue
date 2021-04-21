@@ -352,11 +352,10 @@ export default defineComponent({
 
 <style lang="postcss">
 .cart {
-  margin-top: 100px;
+  margin-top: 108px;
   padding: 60px 40px !important;
 
   @media (--sm) {
-    margin-top: 108px;
     padding: 20px 12px 32px !important;
   }
 }

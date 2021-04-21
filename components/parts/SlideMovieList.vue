@@ -96,6 +96,12 @@ export default defineComponent({
   width: 100%;
 }
 
+.slideMovieList .slide__inner:hover {
+  @media (--not-sm) {
+    opacity: .75;
+  }
+}
+
 .slideMovieList .slide__inner .image img {
   width: 100%;
 }
