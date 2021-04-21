@@ -27,6 +27,8 @@
           v-for="(btn, i) in btns"
           :key="i"
           text
+          plain
+          color="#fff"
           @click="pushPage(btn.to)"
         >
           {{ btn.name }}
@@ -151,8 +153,12 @@ export default defineComponent({
   content: none;
 }
 
-.navi .v-btn {
-  color: #fff;
+.navi .v-btn .v-btn__content {
+  opacity: 1 !important;
+}
+
+.navi .v-btn:hover .v-btn__content {
+  opacity: .9 !important;
 }
 
 .navi .v-btn:before {

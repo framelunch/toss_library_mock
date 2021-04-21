@@ -95,7 +95,7 @@ export default defineComponent({
         })
 
         setTimeout(() => {
-          context.root.$router.push({path: 'search', hash: 'history' })
+          context.root.$router.push('/history')
         }, 110)
 
         setTimeout(() => {
