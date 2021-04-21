@@ -42,7 +42,7 @@ export default defineComponent({
   padding: 60px 40px !important;
 
   @media (--sm) {
-    padding: 20px 12px 32px !important;
+    padding: 20px 20px 32px !important;
   }
 }
 </style>

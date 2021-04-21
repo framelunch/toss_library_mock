@@ -5,21 +5,17 @@
         <v-col
           v-for="(menu, i) in menus"
           :key="i"
-          class="pa-0"
+          class="d-flex flex-column justify-center pa-0"
+          @click="pushPage(menu.to)"
         >
-          <nuxt-link
-            :to="menu.to"
-            class="d-flex flex-column justify-center"
+          <v-icon
+            medium
+            color="white"
+            class="mb-1"
           >
-            <v-icon
-              medium
-              color="white"
-              class="mb-1"
-            >
-              mdi-{{ menu.icon }}
-            </v-icon>
-            {{ menu.name }}
-          </nuxt-link>
+            mdi-{{ menu.icon }}
+          </v-icon>
+          {{ menu.name }}
         </v-col>
       </v-row>
     </v-container>
@@ -27,10 +23,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api'
+import { defineComponent, reactive, SetupContext, toRefs } from '@vue/composition-api'
 
 export default defineComponent({
-  setup (_) {
+  setup (_, context:SetupContext) {
     /* Reactive State */
     const reactiveState = reactive({
       menus: [
@@ -57,8 +53,29 @@ export default defineComponent({
       ]
     })
 
+    /* Methods */
+    const methods = {
+      pushPage (link: string) {
+        const slider = document.querySelectorAll('.slider')
+        slider.forEach((item) => {
+          item.classList.add('-hidden')
+        })
+
+        setTimeout(() => {
+          context.root.$router.push(link)
+        }, 110)
+
+        setTimeout(() => {
+          slider.forEach((item) => {
+            item.classList.remove('-hidden')
+          })
+        }, 1000)
+      }
+    }
+
     return {
-      ...toRefs(reactiveState)
+      ...toRefs(reactiveState),
+      ...methods
     }
   }
 })
@@ -75,10 +92,5 @@ export default defineComponent({
   text-align: center;
   width: 100%;
   z-index: 1000;
-}
-
-.footNavi a {
-  color: #fff !important;
-  text-decoration: none;
 }
 </style>
