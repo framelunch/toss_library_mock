@@ -515,6 +515,7 @@ input[type=checkbox]:checked ~ .expand::before {
     font-size: 12px;
     margin-top: 12px;
     line-height: 1.6;
+    white-space: pre-wrap;
   }
 }
 </style>
