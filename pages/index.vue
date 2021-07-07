@@ -46,8 +46,6 @@ export default defineComponent({
       if (width <= 959) {
         reactiveState.isMobile = true
       }
-
-      console.log('test')
     })
 
     return {
